@@ -22,20 +22,38 @@ export default function ContactPage() {
     });
   };
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitted(true);
-      // Reset form after 3 seconds
-      setTimeout(() => {
-        setSubmitted(false);
+    try {
+      // Send to Formspree
+      const response = await fetch('https://formspree.io/f/mzzjggqj', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        // Success!
+        setSubmitted(true);
         setFormData({ name: '', email: '', phone: '', message: '' });
-      }, 3000);
-    }, 1000);
+        
+        // Reset success message after 5 seconds
+        setTimeout(() => {
+          setSubmitted(false);
+        }, 5000);
+      } else {
+        // Error handling
+        alert('Oops! Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      alert('Oops! Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
