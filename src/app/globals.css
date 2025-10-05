@@ -29,3 +29,13 @@ body { @apply bg-background text-foreground font-sans; }
 .scrollbar-hide::-webkit-scrollbar {
   display: none;  /* Safari and Chrome */
 }
+
+@media (max-width: 360px) {
+  nav ul {
+    gap: 0.5rem !important; /* Even tighter on very small phones */
+  }
+  
+  nav span {
+    font-size: 0.75rem !important; /* Smaller text on tiny screens */
+  }
+}
