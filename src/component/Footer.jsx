@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Music, Instagram, Facebook } from "lucide-react";
+import Image from "next/image";
 
 export default function Footer() {
   const socialLinks = [
@@ -48,6 +49,7 @@ export default function Footer() {
   return (
     <footer className="bg-gradient-to-b from-black to-tekhelet text-white py-12 border-t border-heliotrope/30">
       <div className="container mx-auto px-4">
+        {/* Connect With Us Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -61,6 +63,7 @@ export default function Footer() {
           <div className="w-24 h-1 bg-gradient-to-r from-fuchsia to-heliotrope mx-auto mt-4" />
         </motion.div>
 
+        {/* Social Links */}
         <motion.div
           className="flex justify-center gap-8 mb-8"
           variants={containerVariants}
@@ -102,6 +105,7 @@ export default function Footer() {
           })}
         </motion.div>
 
+        {/* Copyright Section */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -109,9 +113,31 @@ export default function Footer() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="text-center border-t border-heliotrope/20 pt-6"
         >
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-gray-400 mb-4">
             &copy; {new Date().getFullYear()} Pimp My Party. All rights reserved.
           </p>
+
+          {/* Built By Credit - More Prominent */}
+          <motion.a
+            href="https://lancashirewebfixers.co.uk"
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            whileHover={{ scale: 1.08, y: -2 }}
+            className="inline-flex items-center gap-3 text-sm text-gray-400 hover:text-heliotrope transition-all duration-300 bg-black/30 px-6 py-3 rounded-lg border border-heliotrope/20 hover:border-heliotrope/50"
+          >
+            <span className="font-medium">Built by</span>
+            <Image
+              src="/FullLogo_resized.png"
+              alt="Lancashire Web Fixers"
+              width={140}
+              height={35}
+              className="h-6 w-auto opacity-80 hover:opacity-100 transition-opacity duration-300"
+            />
+          </motion.a>
         </motion.div>
       </div>
     </footer>

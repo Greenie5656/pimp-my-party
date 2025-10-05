@@ -19,3 +19,13 @@
 html, body { height: 100%; }
 html { background: #060606; color-scheme: dark; }
 body { @apply bg-background text-foreground font-sans; }
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}
