@@ -70,7 +70,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex items-center justify-center gap-3 mb-12"
+          className="flex flex-wrap items-center justify-center gap-3 mb-12 text-center px-4"
         >
           <motion.div
             animate={{
@@ -82,10 +82,11 @@ export default function Hero() {
               repeat: Infinity,
               ease: "easeInOut",
             }}
+            className="flex-shrink-0"
           >
             <Sparkles className="text-fuchsia" size={28} />
           </motion.div>
-          <p className="text-xl md:text-2xl text-heliotrope font-semibold">
+          <p className="text-xl md:text-2xl text-heliotrope font-semibold text-center">
             Making your party unforgettable!
           </p>
           <motion.div
@@ -99,6 +100,7 @@ export default function Hero() {
               ease: "easeInOut",
               delay: 0.5,
             }}
+            className="flex-shrink-0"
           >
             <Sparkles className="text-fuchsia" size={28} />
           </motion.div>
