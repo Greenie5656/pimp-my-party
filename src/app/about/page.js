@@ -53,7 +53,7 @@ export default function AboutPage() {
             className="text-center mb-12"
           >
             <h1 className="text-5xl md:text-6xl font-bold mb-6 pb-3 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
-              About Pimp My Party
+              About Us
             </h1>
             <motion.div 
               className="w-32 h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 mx-auto"
@@ -228,7 +228,7 @@ export default function AboutPage() {
             />
 
             <Phone className="w-16 h-16 mx-auto mb-6 text-white relative z-10" />
-            <h3 className="text-4xl font-bold text-white mb-4 relative z-10">Ready to Party?</h3>
+            <h3 className="text-4xl font-bold text-white mb-4 relative z-10">Call Us to Book</h3>
             <p className="text-2xl text-white/90 mb-2 relative z-10">CALL:</p>
             <motion.a
               href="tel:07359189070"
@@ -236,7 +236,7 @@ export default function AboutPage() {
               whileTap={{ scale: 0.95 }}
               className="inline-block text-4xl md:text-5xl font-bold text-yellow-300 hover:text-yellow-200 transition-colors relative z-10"
             >
-              07359 189 070
+              07359189070
             </motion.a>
           </div>
         </motion.div>

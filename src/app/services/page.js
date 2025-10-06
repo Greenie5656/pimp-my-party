@@ -57,6 +57,14 @@ export default function ServicesPage() {
   // Our services data with more sophisticated icons
   const services = [
     {
+      icon: Music,
+      title: 'Entertainment Services',
+      description: 'From DJs to live bands, we provide top-tier entertainment to keep your party alive.',
+      features: ['DJ Services', 'Live Music', 'Photo Booths', 'Interactive Games'],
+      gradient: 'from-purple-600 via-indigo-500 to-blue-600',
+      accentColor: 'indigo'
+    },
+    {
       icon: Calendar,
       title: 'Full Event Planning',
       description: 'Complete coordination from concept to cleanup. We handle every detail so you can enjoy your celebration.',
@@ -79,14 +87,6 @@ export default function ServicesPage() {
       features: ['Entertainment Booking', 'Activity Planning', 'Guest Coordination', 'Welcome Packages'],
       gradient: 'from-indigo-600 via-blue-500 to-cyan-600',
       accentColor: 'blue'
-    },
-    {
-      icon: Music,
-      title: 'Entertainment Services',
-      description: 'From DJs to live bands, we provide top-tier entertainment to keep your party alive.',
-      features: ['DJ Services', 'Live Music', 'Photo Booths', 'Interactive Games'],
-      gradient: 'from-purple-600 via-indigo-500 to-blue-600',
-      accentColor: 'indigo'
     },
     {
       icon: Utensils,

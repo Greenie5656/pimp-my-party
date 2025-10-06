@@ -3,9 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
 
 export default function NavBar() {
   const pathname = usePathname();
+  const [isVisible, setIsVisible] = useState(true);
+  const lastScrollY = useRef(0);
+  const scrollDirection = useRef("up");
 
   const navLinks = [
     { name: "Home", href: "/" },
@@ -14,6 +18,64 @@ export default function NavBar() {
     { name: "Gallery", href: "/gallery" },
     { name: "Contact", href: "/contact" },
   ];
+
+  useEffect(() => {
+    const threshold = 10; // Minimum scroll distance to trigger change
+    let ticking = false;
+
+    const updateScrollDirection = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Always show at the very top
+      if (currentScrollY < 10) {
+        setIsVisible(true);
+        scrollDirection.current = "up";
+        lastScrollY.current = currentScrollY;
+        return;
+      }
+
+      // Calculate scroll difference
+      const scrollDifference = currentScrollY - lastScrollY.current;
+
+      // Only update if scrolled more than threshold
+      if (Math.abs(scrollDifference) < threshold) {
+        return;
+      }
+
+      // Determine direction
+      if (scrollDifference > 0) {
+        // Scrolling DOWN
+        if (scrollDirection.current !== "down") {
+          scrollDirection.current = "down";
+          setIsVisible(false);
+        }
+      } else {
+        // Scrolling UP
+        if (scrollDirection.current !== "up") {
+          scrollDirection.current = "up";
+          setIsVisible(true);
+        }
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateScrollDirection();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -39,7 +101,11 @@ export default function NavBar() {
   };
 
   return (
-    <nav className="bg-black text-white py-4 border-b border-heliotrope/30 sticky top-0 z-50 backdrop-blur-sm">
+    <nav
+      className={`bg-black text-white py-4 border-b border-heliotrope/30 sticky top-0 z-50 backdrop-blur-sm transition-transform duration-300 ${
+        isVisible ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
       <div className="container mx-auto px-2 sm:px-4">
         <motion.ul
           className="flex justify-center items-center gap-3 xs:gap-4 sm:gap-6 md:gap-8 lg:gap-12"
