@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/component/Header";
 import NavBar from "@/component/NavBar";
 import Footer from "@/component/Footer";
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -53,7 +54,7 @@ export const metadata = {
     apple: '/apple-touch-icon.png',
   },
   
-  // Open Graph (Social Media Sharing)
+  // Open Graph (Social Media Sharing) - FIXED FOR FULL IMAGE
   openGraph: {
     type: 'website',
     locale: 'en_GB',
@@ -63,20 +64,22 @@ export const metadata = {
     description: "Expert Mobile DJ, Wedding DJ & Photobooth Hire across Manchester, Salford, Bury & Greater Manchester. 20 years experience.",
     images: [
       {
-        url: '/socials.png',
+        url: 'https://pimpmyparty.co.uk/socials.png',  // Full URL
         width: 1200,
         height: 630,
         alt: 'Pimp My Party - Professional DJ & Entertainment Services Manchester',
+        type: 'image/png',
       },
     ],
   },
   
-  // Twitter Card
+  // Twitter Card - FIXED FOR FULL IMAGE
   twitter: {
     card: 'summary_large_image',
+    site: '@pimpmypartymcr',  // Add your Twitter handle if you have one
     title: "Pimp My Party | Professional DJ Services Manchester",
     description: "Expert Mobile DJ, Wedding DJ & Photobooth Hire across Manchester, Salford, Bury & Greater Manchester. 20 years experience.",
-    images: ['/socials.png'],
+    images: ['https://pimpmyparty.co.uk/socials.png'],  // Full URL
   },
   
   // Additional metadata
@@ -221,9 +224,8 @@ export default function RootLayout({ children }) {
     
     // Social Media & Contact Points
     "sameAs": [
-   "https://www.facebook.com/pimpmypartymcr",
-   "https://www.instagram.com/pimpmypartymcr"
-
+      "https://www.facebook.com/pimpmypartymcr",
+      "https://www.instagram.com/pimpmypartymcr"
     ],
     
     // Additional Business Info
@@ -299,6 +301,9 @@ export default function RootLayout({ children }) {
         {children}
         
         <Footer />
+        
+        {/* Google Analytics - ADDED */}
+        <GoogleAnalytics gaId="G-J22NSQHKQ2" />
       </body>
     </html>
   );
