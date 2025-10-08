@@ -10,7 +10,8 @@ import {
   Utensils,
   Gift,
   Star,
-  CheckCircle2
+  CheckCircle2,
+  MapPin
 } from 'lucide-react';
 
 export default function ServicesPage() {
@@ -54,20 +55,20 @@ export default function ServicesPage() {
     }
   };
 
-  // Our services data with more sophisticated icons
+  // Our services data with SEO-enhanced descriptions
   const services = [
     {
       icon: Music,
       title: 'Entertainment Services',
-      description: 'From DJs to live bands, we provide top-tier entertainment to keep your party alive.',
-      features: ['DJ Services', 'Live Music', 'Photo Booths', 'Interactive Games'],
+      description: 'Professional DJs, live saxophone performances, and interactive photo booths across Manchester, Salford, Bury, and Greater Manchester. Top-tier entertainment to keep your party alive.',
+      features: ['Mobile DJ Services', 'Live Saxophone Player', 'Selfie Photo Booths', 'Interactive Games'],
       gradient: 'from-purple-600 via-indigo-500 to-blue-600',
       accentColor: 'indigo'
     },
     {
       icon: Calendar,
       title: 'Full Event Planning',
-      description: 'Complete coordination from concept to cleanup. We handle every detail so you can enjoy your celebration.',
+      description: 'Complete event coordination across Manchester and surrounding areas. From concept to cleanup, we handle every detail of your wedding, party, or corporate event.',
       features: ['Timeline Management', 'Vendor Coordination', 'Day-of Execution', 'Budget Planning'],
       gradient: 'from-purple-600 via-purple-500 to-indigo-600',
       accentColor: 'purple'
@@ -75,7 +76,7 @@ export default function ServicesPage() {
     {
       icon: Sparkles,
       title: 'Venue Decoration',
-      description: 'Transform any space into a magical setting with our expert design and decoration services.',
+      description: 'Transform any venue in Manchester, Cheshire, or Lancashire into a magical setting with our expert design and decoration services for weddings and parties.',
       features: ['Theme Design', 'Custom Backdrops', 'Lighting Setup', 'Table Arrangements'],
       gradient: 'from-pink-600 via-pink-500 to-rose-600',
       accentColor: 'pink'
@@ -83,7 +84,7 @@ export default function ServicesPage() {
     {
       icon: Users,
       title: 'Guest Experience',
-      description: 'Create unforgettable moments for your guests with curated entertainment and activities.',
+      description: 'Create unforgettable moments for your wedding or party guests with curated entertainment and activities throughout Greater Manchester.',
       features: ['Entertainment Booking', 'Activity Planning', 'Guest Coordination', 'Welcome Packages'],
       gradient: 'from-indigo-600 via-blue-500 to-cyan-600',
       accentColor: 'blue'
@@ -91,7 +92,7 @@ export default function ServicesPage() {
     {
       icon: Utensils,
       title: 'Catering Coordination',
-      description: 'Delicious food experiences tailored to your taste and dietary requirements.',
+      description: 'Delicious food experiences for events across Salford, Bury, Heywood, and Middleton, tailored to your taste and dietary requirements.',
       features: ['Menu Planning', 'Vendor Selection', 'Dietary Accommodations', 'Bar Services'],
       gradient: 'from-rose-600 via-pink-500 to-purple-600',
       accentColor: 'rose'
@@ -99,7 +100,7 @@ export default function ServicesPage() {
     {
       icon: Camera,
       title: 'Photography & Video',
-      description: 'Capture every precious moment with professional photography and videography services.',
+      description: 'Capture every precious moment of your wedding or party with professional photography and videography services across the North West.',
       features: ['Professional Photos', 'Video Coverage', 'Drone Footage', 'Editing Services'],
       gradient: 'from-cyan-600 via-blue-500 to-indigo-600',
       accentColor: 'cyan'
@@ -154,7 +155,7 @@ export default function ServicesPage() {
               Our Services
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-              Comprehensive event planning solutions tailored to make your celebration extraordinary and stress-free.
+              Comprehensive event planning solutions for weddings, parties, and corporate events across Manchester, Salford, Bury, and Greater Manchester.
             </p>
           </motion.div>
         </div>
@@ -232,6 +233,51 @@ export default function ServicesPage() {
             })}
           </div>
         </motion.div>
+      </section>
+
+      {/* NEW: Service Areas Section - Subtle SEO boost */}
+      <section className="py-16 px-4 bg-gradient-to-br from-purple-50 via-white to-pink-50">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <MapPin className="w-12 h-12 text-purple-600 mx-auto mb-4" />
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Serving Greater Manchester & Beyond
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Our professional mobile DJ, wedding DJ, saxophone player, and photobooth hire services are available throughout Manchester, Salford, Bury, Heywood, Middleton, Prestwich, Oldham, Worsley, and across Greater Manchester, Cheshire, and Lancashire.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="flex flex-wrap justify-center gap-3"
+          >
+            {[
+              'Manchester', 'Salford', 'Bury', 'Heywood', 'Middleton', 
+              'Prestwich', 'Oldham', 'Worsley', 'Greater Manchester', 
+              'Cheshire', 'Lancashire'
+            ].map((location, index) => (
+              <motion.span
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+                className="px-4 py-2 bg-white rounded-full text-gray-700 font-medium shadow-md hover:shadow-lg transition-shadow duration-300 border border-purple-100"
+              >
+                {location}
+              </motion.span>
+            ))}
+          </motion.div>
+        </div>
       </section>
 
       {/* Process Section */}
