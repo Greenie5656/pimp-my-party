@@ -264,6 +264,8 @@ export default function RootLayout({ children }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
         />
+
+        <meta name="google-site-verification" content="Wb-hKqYGgIBAO-4niVTid-14M4YzI9bRzv7HWYDzuos" />
         
         {/* Additional SEO Meta Tags */}
         <meta name="geo.region" content="GB-MAN" />
