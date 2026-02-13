@@ -276,7 +276,6 @@ export default function RootLayout({ children }) {
         <meta name="ICBM" content="53.5526, -2.1761" />
         
         {/* Contact Information */}
-        <link rel="canonical" href="https://pimpmyparty.co.uk" />
         <meta name="contact" content="hello@pimpmyparty.co.uk" />
         <meta name="phone" content="+447359189070" />
         

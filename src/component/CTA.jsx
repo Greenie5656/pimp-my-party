@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { ArrowRight, Check, Sparkles } from 'lucide-react';
+import { trackCTAClick } from '@/lib/gtag';
 
 export default function CTA() {
   return (
@@ -99,6 +100,7 @@ export default function CTA() {
             >
               <motion.a
                 href="/contact"
+                onClick={() => trackCTAClick('get_free_quote', 'homepage_cta')}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center gap-3 bg-white text-purple-600 px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-2xl transition-all duration-300 group"
