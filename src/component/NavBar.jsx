@@ -11,13 +11,14 @@ export default function NavBar() {
   const lastScrollY = useRef(0);
   const scrollDirection = useRef("up");
 
-  const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Services", href: "/services" },
-    { name: "Gallery", href: "/gallery" },
-    { name: "Contact", href: "/contact" },
-  ];
+const navLinks = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Services", href: "/services" },
+  { name: "Gallery", href: "/gallery" },
+  { name: "Brochure", href: "/brochure" },
+  { name: "Contact", href: "/contact" },
+];
 
   useEffect(() => {
     const threshold = 10; // Minimum scroll distance to trigger change
