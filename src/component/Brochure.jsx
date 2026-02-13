@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Download, FileText } from "lucide-react";
+import { trackBrochureDownload } from "@/lib/gtag";
 
 const brochures = [
   {
@@ -97,6 +98,7 @@ export default function Brochure() {
             <a
               href={brochure.file}
               download={brochure.filename}
+              onClick={() => trackBrochureDownload(brochure.title)}
               className={btnClass}
             >
               <Download size={18} />

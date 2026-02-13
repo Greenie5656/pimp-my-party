@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Music, Instagram, Facebook } from "lucide-react";
 import Image from "next/image";
+import { trackSocialClick } from "@/lib/gtag";
 
 export default function Footer() {
   const socialLinks = [
@@ -79,6 +80,7 @@ export default function Footer() {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackSocialClick(social.name)}
                 variants={itemVariants}
                 whileHover={{
                   y: -8,
