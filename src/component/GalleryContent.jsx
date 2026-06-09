@@ -9,27 +9,28 @@ export default function GalleryContent() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // All your gallery images
+  // Gallery images with descriptive alt text for SEO and accessibility.
+  // TODO: 'original.webp' has no descriptive filename — please provide an accurate description for this image.
   const images = [
-    '/gallery/bride_groom_love_decor.png',
-    '/gallery/bride_groom.jpeg',
-    '/gallery/cold_spark_machine_2.jpg',
-    '/gallery/cold_spark_machine.webp',
-    '/gallery/first_dance.jpeg',
-    '/gallery/original.webp',
-    '/gallery/sax_player_2.jpg',
-    '/gallery/sax_player_3.jpg',
-    '/gallery/sax_player_and_bride.jpeg',
-    '/gallery/sax_player.jpg',
-    '/gallery/wedding_dance.webp',
-    '/gallery/wedding_party.jpg',
-    '/gallery/wedding_venue_2.png',
-    '/gallery/wedding_venue.jpg'
+    { src: '/gallery/bride_groom_love_decor.png',    alt: 'Bride and groom with love heart wedding decor at reception' },
+    { src: '/gallery/bride_groom.jpeg',               alt: 'Bride and groom celebrating at wedding reception' },
+    { src: '/gallery/cold_spark_machine_2.jpg',       alt: 'Cold spark machine special effects at event' },
+    { src: '/gallery/cold_spark_machine.webp',        alt: 'Cold spark machine effect at wedding celebration' },
+    { src: '/gallery/first_dance.jpeg',               alt: 'Bride and groom first dance at wedding reception' },
+    { src: '/gallery/original.webp',                  alt: 'Pimp My Party event entertainment' }, // TODO: replace with accurate description
+    { src: '/gallery/sax_player_2.jpg',               alt: 'Live saxophone player performing at event' },
+    { src: '/gallery/sax_player_3.jpg',               alt: 'Saxophone player performing at Manchester event' },
+    { src: '/gallery/sax_player_and_bride.jpeg',      alt: 'Live saxophone player performing alongside bride at wedding' },
+    { src: '/gallery/sax_player.jpg',                 alt: 'Live saxophone performance at wedding celebration' },
+    { src: '/gallery/wedding_dance.webp',             alt: 'Guests dancing at wedding reception' },
+    { src: '/gallery/wedding_party.jpg',              alt: 'Wedding party guests celebrating together' },
+    { src: '/gallery/wedding_venue_2.png',            alt: 'Wedding venue decorated with lighting and decor' },
+    { src: '/gallery/wedding_venue.jpg',              alt: 'Wedding venue setup for celebration event' },
   ];
 
   const openLightbox = (index) => {
     setCurrentIndex(index);
-    setSelectedImage(images[index]);
+    setSelectedImage(images[index].src);
   };
 
   const closeLightbox = () => {
@@ -39,13 +40,13 @@ export default function GalleryContent() {
   const goToNext = () => {
     const nextIndex = (currentIndex + 1) % images.length;
     setCurrentIndex(nextIndex);
-    setSelectedImage(images[nextIndex]);
+    setSelectedImage(images[nextIndex].src);
   };
 
   const goToPrevious = () => {
     const prevIndex = (currentIndex - 1 + images.length) % images.length;
     setCurrentIndex(prevIndex);
-    setSelectedImage(images[prevIndex]);
+    setSelectedImage(images[prevIndex].src);
   };
 
   return (
@@ -95,7 +96,7 @@ export default function GalleryContent() {
                   visible: { opacity: 1, scale: 1 },
                   transition: { duration: 0.6 }
                 }}
-                whileHover={{ 
+                whileHover={{
                   scale: 1.05,
                   zIndex: 10,
                   transition: { duration: 0.5 }
@@ -105,8 +106,8 @@ export default function GalleryContent() {
               >
                 {/* Image */}
                 <Image
-                  src={image}
-                  alt={`Gallery image ${index + 1}`}
+                  src={image.src}
+                  alt={image.alt}
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
@@ -202,7 +203,7 @@ export default function GalleryContent() {
               <div className="relative w-full h-full rounded-lg overflow-hidden">
                 <Image
                   src={selectedImage}
-                  alt="Selected gallery image"
+                  alt={images[currentIndex]?.alt ?? 'Pimp My Party event photo'}
                   fill
                   className="object-contain"
                   sizes="90vw"

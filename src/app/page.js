@@ -7,7 +7,7 @@ export const metadata = {
   title: "Pimp My Party | Mobile DJ & Party Services Manchester | Wedding DJ Hire",
   description: "Professional Mobile DJ, Wedding DJ, Saxophone Player & Photobooth Hire in Manchester, Salford, Bury & Greater Manchester. 20 years experience. Book your event today!",
   alternates: {
-    canonical: '/',
+    canonical: 'https://pimpmyparty.co.uk',
   },
 };
 

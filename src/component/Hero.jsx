@@ -52,9 +52,9 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-center mb-6"
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-2 bg-gradient-to-r from-heliotrope via-fuchsia to-heliotrope bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-6xl font-bold mb-2 bg-gradient-to-r from-heliotrope via-fuchsia to-heliotrope bg-clip-text text-transparent">
             Professional DJ Services
-          </h2>
+          </h1>
           
           {/* Animated underline */}
           <motion.div
