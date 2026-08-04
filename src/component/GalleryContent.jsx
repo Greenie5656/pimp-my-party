@@ -10,14 +10,13 @@ export default function GalleryContent() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Gallery images with descriptive alt text for SEO and accessibility.
-  // TODO: 'original.webp' has no descriptive filename — please provide an accurate description for this image.
   const images = [
     { src: '/gallery/bride_groom_love_decor.png',    alt: 'Bride and groom with love heart wedding decor at reception' },
     { src: '/gallery/bride_groom.jpeg',               alt: 'Bride and groom celebrating at wedding reception' },
     { src: '/gallery/cold_spark_machine_2.jpg',       alt: 'Cold spark machine special effects at event' },
     { src: '/gallery/cold_spark_machine.webp',        alt: 'Cold spark machine effect at wedding celebration' },
     { src: '/gallery/first_dance.jpeg',               alt: 'Bride and groom first dance at wedding reception' },
-    { src: '/gallery/original.webp',                  alt: 'Pimp My Party event entertainment' }, // TODO: replace with accurate description
+    { src: '/gallery/original.webp',                  alt: 'Saxophone player performing among dancing guests in a stone-walled venue' },
     { src: '/gallery/sax_player_2.jpg',               alt: 'Live saxophone player performing at event' },
     { src: '/gallery/sax_player_3.jpg',               alt: 'Saxophone player performing at Manchester event' },
     { src: '/gallery/sax_player_and_bride.jpeg',      alt: 'Live saxophone player performing alongside bride at wedding' },

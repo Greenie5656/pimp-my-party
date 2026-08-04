@@ -3,7 +3,9 @@
 import { motion } from "framer-motion";
 import { Music, Instagram, Facebook } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { trackSocialClick } from "@/lib/gtag";
+import { publishedLocations } from "@/lib/locations";
 
 export default function Footer() {
   const socialLinks = [
@@ -106,6 +108,32 @@ export default function Footer() {
             );
           })}
         </motion.div>
+
+        {/* Areas We Cover - crawlable links to the location pages */}
+        {publishedLocations.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-center mb-8"
+          >
+            <p className="text-xs uppercase tracking-wider text-gray-500 mb-3">
+              Areas We Cover
+            </p>
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+              {publishedLocations.map((location) => (
+                <Link
+                  key={location.slug}
+                  href={`/${location.slug}`}
+                  className="text-sm text-gray-400 hover:text-heliotrope transition-colors duration-300"
+                >
+                  {location.breadcrumbName}
+                </Link>
+              ))}
+            </div>
+          </motion.div>
+        )}
 
         {/* Copyright Section */}
         <motion.div

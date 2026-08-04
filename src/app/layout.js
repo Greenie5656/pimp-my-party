@@ -92,6 +92,9 @@ export default function RootLayout({ children }) {
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
+    // Stable identifier so other pages can reference this single business
+    // entity instead of declaring a duplicate one.
+    "@id": "https://pimpmyparty.co.uk/#localbusiness",
     "name": "Pimp My Party",
     "image": "https://pimpmyparty.co.uk/socials.png",
     "description": "Professional Mobile DJ, Wedding DJ, Saxophone Player & Photobooth Hire in Manchester, Salford, Bury & Greater Manchester. 20 years of experience delivering unforgettable events.",
@@ -101,11 +104,12 @@ export default function RootLayout({ children }) {
     "email": "hello@pimpmyparty.co.uk",
     "url": "https://pimpmyparty.co.uk",
     
-    // Address
+    // Address - this is the physical business address only. The areas the
+    // business actually serves, including Manchester, are in areaServed below.
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "5 Durness Place",
-      "addressLocality": "Manchester",
+      "addressLocality": "Heywood",
       "addressRegion": "Greater Manchester",
       "postalCode": "OL10 3ST",
       "addressCountry": "GB"
@@ -281,7 +285,7 @@ export default function RootLayout({ children }) {
         
         {/* Business Information */}
         <meta name="business:contact_data:street_address" content="5 Durness Place" />
-        <meta name="business:contact_data:locality" content="Manchester" />
+        <meta name="business:contact_data:locality" content="Heywood" />
         <meta name="business:contact_data:region" content="Greater Manchester" />
         <meta name="business:contact_data:postal_code" content="OL10 3ST" />
         <meta name="business:contact_data:country_name" content="United Kingdom" />
