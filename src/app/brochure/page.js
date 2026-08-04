@@ -1,19 +1,22 @@
 import Brochure from "@/component/Brochure";
 
+const title = "DJ, Photo Booth & Party Prices | Download Our Brochure | Pimp My Party";
+const description = "Download our brochures for full prices: wedding and party DJs, saxophone players, photo booths, dancefloor hire, venue lighting and LED letters across Manchester and Greater Manchester.";
+
 export const metadata = {
-  title: "Download Our Brochure | DJ Hire & Event Services Manchester | Pimp My Party",
-  description: "Download our event and pricing brochures covering mobile DJ hire, photobooth hire, saxophone player and entertainment packages across Manchester and Greater Manchester.",
+  title,
+  description,
   alternates: {
     canonical: 'https://pimpmyparty.co.uk/brochure',
   },
   openGraph: {
-    title: "Download Our Brochure | Pimp My Party",
-    description: "Download our event and pricing brochures covering mobile DJ hire, photobooth hire, saxophone player and entertainment packages across Manchester and Greater Manchester.",
+    title,
+    description,
     url: 'https://pimpmyparty.co.uk/brochure',
   },
   twitter: {
-    title: "Download Our Brochure | Pimp My Party",
-    description: "Download our event and pricing brochures covering mobile DJ hire, photobooth hire, saxophone player and entertainment packages across Manchester and Greater Manchester.",
+    title,
+    description,
   },
 };
 

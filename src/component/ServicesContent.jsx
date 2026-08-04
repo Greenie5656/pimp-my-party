@@ -262,21 +262,27 @@ export default function ServicesContent() {
             className="flex flex-wrap justify-center gap-3"
           >
             {[
-              'Manchester', 'Salford', 'Bury', 'Heywood', 'Middleton', 
-              'Prestwich', 'Oldham', 'Worsley', 'Greater Manchester', 
-              'Cheshire', 'Lancashire'
-            ].map((location, index) => (
-              <motion.span
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-                className="px-4 py-2 bg-white rounded-full text-gray-700 font-medium shadow-md hover:shadow-lg transition-shadow duration-300 border border-purple-100"
-              >
-                {location}
-              </motion.span>
-            ))}
+              // Areas with a `href` link through to their own location page.
+              { name: 'Manchester', href: '/wedding-dj-manchester' },
+              { name: 'Salford' }, { name: 'Bury' }, { name: 'Heywood' }, { name: 'Middleton' },
+              { name: 'Prestwich' }, { name: 'Oldham' }, { name: 'Worsley' }, { name: 'Greater Manchester' },
+              { name: 'Cheshire' }, { name: 'Lancashire' }
+            ].map((location, index) => {
+              const Pill = location.href ? motion.a : motion.span;
+              return (
+                <Pill
+                  key={index}
+                  {...(location.href ? { href: location.href } : {})}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.05 }}
+                  className="px-4 py-2 bg-white rounded-full text-gray-700 font-medium shadow-md hover:shadow-lg transition-shadow duration-300 border border-purple-100"
+                >
+                  {location.name}
+                </Pill>
+              );
+            })}
           </motion.div>
         </div>
       </section>

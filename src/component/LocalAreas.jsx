@@ -27,7 +27,8 @@ export default function LocalAreas() {
           className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
         >
           {[
-            { area: 'Manchester', services: 'Mobile DJ \u2022 Wedding DJ \u2022 Photobooth' },
+            // Areas with a `href` link through to their own location page.
+            { area: 'Manchester', services: 'Mobile DJ \u2022 Wedding DJ \u2022 Photobooth', href: '/wedding-dj-manchester' },
             { area: 'Salford', services: 'Party DJ \u2022 Saxophone Player' },
             { area: 'Bury', services: 'Wedding DJ \u2022 Event Services' },
             { area: 'Heywood', services: 'Mobile DJ \u2022 Photobooth Hire' },
@@ -38,23 +39,29 @@ export default function LocalAreas() {
             { area: 'Greater Manchester', services: 'All Event Services' },
             { area: 'Cheshire', services: 'Wedding DJ \u2022 Mobile DJ' },
             { area: 'Lancashire', services: 'Party DJ \u2022 Event Entertainment' },
-          ].map((location, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
-              className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-purple-500/20 hover:border-purple-500/50 transition-all duration-300"
-            >
-              <h3 className="text-xl font-bold text-purple-400 mb-2">
-                {location.area}
-              </h3>
-              <p className="text-sm text-gray-400">
-                {location.services}
-              </p>
-            </motion.div>
-          ))}
+          ].map((location, index) => {
+            // Linked areas render as an anchor so the location page is
+            // crawlable. Styling and animation are identical either way.
+            const Card = location.href ? motion.a : motion.div;
+            return (
+              <Card
+                key={index}
+                {...(location.href ? { href: location.href } : {})}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+                className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-purple-500/20 hover:border-purple-500/50 transition-all duration-300"
+              >
+                <h3 className="text-xl font-bold text-purple-400 mb-2">
+                  {location.area}
+                </h3>
+                <p className="text-sm text-gray-400">
+                  {location.services}
+                </p>
+              </Card>
+            );
+          })}
         </motion.div>
 
         <motion.p

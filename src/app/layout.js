@@ -92,6 +92,9 @@ export default function RootLayout({ children }) {
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
+    // Stable identifier so other pages can reference this single business
+    // entity instead of declaring a duplicate one.
+    "@id": "https://pimpmyparty.co.uk/#localbusiness",
     "name": "Pimp My Party",
     "image": "https://pimpmyparty.co.uk/socials.png",
     "description": "Professional Mobile DJ, Wedding DJ, Saxophone Player & Photobooth Hire in Manchester, Salford, Bury & Greater Manchester. 20 years of experience delivering unforgettable events.",

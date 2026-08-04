@@ -1,19 +1,22 @@
 import AboutContent from "@/component/AboutContent";
 
+const title = "About Pimp My Party | 20 Years of DJ & Event Experience in Manchester";
+const description = "Twenty years of running events across Manchester and Greater Manchester, from intimate weddings to festivals of 6,000 people. Meet the team behind your DJ, saxophone player, photo booth and event planning.";
+
 export const metadata = {
-  title: "About Us | Pimp My Party - 20 Years of Event Experience Manchester",
-  description: "With over 20 years of event expertise, Pimp My Party delivers professional Mobile DJ, Wedding DJ, Saxophone & Photobooth services across Manchester and Greater Manchester.",
+  title,
+  description,
   alternates: {
     canonical: 'https://pimpmyparty.co.uk/about',
   },
   openGraph: {
-    title: "About Us | Pimp My Party - 20 Years of Event Experience Manchester",
-    description: "With over 20 years of event expertise, Pimp My Party delivers professional Mobile DJ, Wedding DJ, Saxophone & Photobooth services across Manchester and Greater Manchester.",
+    title,
+    description,
     url: 'https://pimpmyparty.co.uk/about',
   },
   twitter: {
-    title: "About Us | Pimp My Party - 20 Years of Event Experience Manchester",
-    description: "With over 20 years of event expertise, Pimp My Party delivers professional Mobile DJ, Wedding DJ, Saxophone & Photobooth services across Manchester and Greater Manchester.",
+    title,
+    description,
   },
 };
 
