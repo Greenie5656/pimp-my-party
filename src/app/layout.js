@@ -281,7 +281,6 @@ export default function RootLayout({ children }) {
         
         {/* Contact Information */}
         <meta name="contact" content="hello@pimpmyparty.co.uk" />
-        <meta name="phone" content="+447359189070" />
         
         {/* Business Information */}
         <meta name="business:contact_data:street_address" content="5 Durness Place" />
