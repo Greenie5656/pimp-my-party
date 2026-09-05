@@ -4,7 +4,7 @@ export default function robots() {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/_next/'],
+        disallow: ['/api/', '/_next/', '/admin'],
       },
     ],
     sitemap: 'https://pimpmyparty.co.uk/sitemap.xml',

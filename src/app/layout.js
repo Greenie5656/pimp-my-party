@@ -1,9 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "@/component/Header";
-import NavBar from "@/component/NavBar";
-import Footer from "@/component/Footer";
-import { GoogleAnalytics } from '@next/third-parties/google'
+import SiteChrome from "@/component/SiteChrome";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -294,19 +291,9 @@ export default function RootLayout({ children }) {
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </head>
       
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Header />
-        <NavBar />
-        
-        {children}
-        
-        <Footer />
-        
-        {/* Google Analytics - ADDED */}
-        <GoogleAnalytics gaId="G-J22NSQHKQ2" />
-      </body>
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+         <SiteChrome>{children}</SiteChrome>
+         </body>
     </html>
   );
 }
