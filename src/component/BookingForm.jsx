@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { trackFormSubmission } from '@/lib/gtag';
 import {
   Calendar,
@@ -65,6 +65,11 @@ const inputClasses =
 
 const labelClasses = 'text-gray-300 mb-2 font-semibold flex items-center gap-2';
 
+// iOS Safari sizes date inputs from their intrinsic content and ignores
+// width: 100%, so the field grows wider than the card and spills over the
+// edge. Killing the native appearance and pinning the box width keeps it in.
+const dateInputClasses = `${inputClasses} block appearance-none min-w-0 max-w-full [&::-webkit-date-and-time-value]:text-left [&::-webkit-date-and-time-value]:min-h-[1.5rem]`;
+
 
 
 // --- Component -------------------------------------------------------------
@@ -75,6 +80,27 @@ export default function BookingForm() {
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+
+  // The card is the thing worth looking at when a step changes, so we scroll
+  // to it rather than the very top of the page. The sticky nav sits over the
+  // first ~80px, so leave it some room.
+  const cardRef = useRef(null);
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    // Don't hijack the scroll position on the initial page load.
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
+    const card = cardRef.current;
+    const top = card
+      ? Math.max(card.getBoundingClientRect().top + window.scrollY - 96, 0)
+      : 0;
+
+    window.scrollTo({ top, behavior: 'smooth' });
+  }, [step, submitted]);
 
   const estimate = buildEstimate(formData.package, formData.extras);
 
@@ -201,6 +227,7 @@ export default function BookingForm() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
+          ref={cardRef}
           className="max-w-lg w-full bg-gray-800/50 backdrop-blur-sm rounded-3xl p-8 md:p-10 border border-gray-700/50 text-center"
         >
           <motion.div
@@ -242,9 +269,16 @@ export default function BookingForm() {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-300"
+                className="block w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold px-4 py-4 rounded-xl text-center text-[0.9375rem] sm:text-base leading-snug transition-all duration-300"
               >
-                <CreditCard size={20} />
+                {/* The icon sits in the text flow rather than as a flex sibling:
+                    on a narrow phone the label wraps, and a flex icon gets
+                    stranded against the left edge while the text centres. */}
+                <CreditCard
+                  size={18}
+                  className="inline-block align-[-0.2em] mr-2"
+                  aria-hidden="true"
+                />
                 Secure your date — {DEPOSIT_AMOUNT} deposit
               </motion.a>
               <p className="text-xs text-gray-500 mt-3">
@@ -307,6 +341,7 @@ export default function BookingForm() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
+            ref={cardRef}
             className="bg-gray-800/50 backdrop-blur-sm rounded-3xl p-6 md:p-10 border border-gray-700/50"
           >
             {/* Progress */}
@@ -389,7 +424,7 @@ export default function BookingForm() {
                         value={formData.eventDate}
                         onChange={handleChange}
                         min={new Date().toISOString().split('T')[0]}
-                        className={inputClasses}
+                        className={dateInputClasses}
                       />
                     </div>
 
