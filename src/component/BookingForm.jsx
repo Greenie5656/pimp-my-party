@@ -464,22 +464,17 @@ export default function BookingForm() {
                               : 'bg-gray-900/50 border-gray-700 hover:border-purple-500'
                           }`}
                         >
-                          <div className="flex items-start justify-between gap-4">
-                            <div className="flex items-start gap-3">
-                              <Disc3
-                                size={24}
-                                className="text-purple-400 flex-shrink-0 mt-1"
-                                strokeWidth={1.5}
-                              />
-                              <div>
-                                <p className="font-bold text-lg">{pkg.name}</p>
-                                <p className="text-sm text-gray-400">{pkg.duration}</p>
-                                <p className="text-sm text-gray-400 mt-1">{pkg.blurb}</p>
-                              </div>
+                          <div className="flex items-start gap-3">
+                            <Disc3
+                              size={24}
+                              className="text-purple-400 flex-shrink-0 mt-1"
+                              strokeWidth={1.5}
+                            />
+                            <div>
+                              <p className="font-bold text-lg">{pkg.name}</p>
+                              <p className="text-sm text-gray-400">{pkg.duration}</p>
+                              <p className="text-sm text-gray-400 mt-1">{pkg.blurb}</p>
                             </div>
-                            <p className="text-2xl font-bold text-pink-400 flex-shrink-0">
-                              £{pkg.price}
-                            </p>
                           </div>
                         </button>
                       ))}
