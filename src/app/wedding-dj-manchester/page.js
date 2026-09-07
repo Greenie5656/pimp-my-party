@@ -1,5 +1,6 @@
 import LocationContent from "@/component/LocationContent";
 import { locations, SITE_URL } from "@/lib/locations";
+import { LOCAL_BUSINESS_ID, OG_IMAGE } from "@/lib/site";
 
 const location = locations.manchester;
 const pageUrl = `${SITE_URL}/${location.slug}`;
@@ -17,22 +18,14 @@ export const metadata = {
     title: location.title,
     description: location.description,
     url: pageUrl,
-    images: [
-      {
-        url: 'https://pimpmyparty.co.uk/socials.png',
-        width: 1200,
-        height: 630,
-        alt: 'Pimp My Party - DJ & Entertainment Services Manchester',
-        type: 'image/png',
-      },
-    ],
+    images: [OG_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     site: '@pimpmypartymcr',
     title: location.title,
     description: location.description,
-    images: ['https://pimpmyparty.co.uk/socials.png'],
+    images: [OG_IMAGE.url],
   },
 };
 
@@ -65,7 +58,7 @@ const serviceSchema = {
   "description": location.description,
   "url": pageUrl,
   "provider": {
-    "@id": `${SITE_URL}/#localbusiness`
+    "@id": LOCAL_BUSINESS_ID
   },
   "areaServed": [
     { "@type": "City", "name": location.name },

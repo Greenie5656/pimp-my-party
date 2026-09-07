@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SiteChrome from "@/component/SiteChrome";
+import { LOCAL_BUSINESS_ID, OG_IMAGE, SITE_URL, url } from "@/lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,7 +24,7 @@ export const metadata = {
   publisher: "Pimp My Party",
   
   // Verification and ownership
-  metadataBase: new URL('https://pimpmyparty.co.uk'),
+  metadataBase: new URL(SITE_URL),
   alternates: {
     canonical: '/',
   },
@@ -55,19 +56,11 @@ export const metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_GB',
-    url: 'https://pimpmyparty.co.uk',
+    url: url(),
     siteName: 'Pimp My Party',
     title: "Pimp My Party | Professional DJ Services Manchester",
     description: "Expert Mobile DJ, Wedding DJ & Photobooth Hire across Manchester, Salford, Bury & Greater Manchester. 20 years experience.",
-    images: [
-      {
-        url: 'https://pimpmyparty.co.uk/socials.png',  // Full URL
-        width: 1200,
-        height: 630,
-        alt: 'Pimp My Party - Professional DJ & Entertainment Services Manchester',
-        type: 'image/png',
-      },
-    ],
+    images: [OG_IMAGE],
   },
   
   // Twitter Card - FIXED FOR FULL IMAGE
@@ -76,7 +69,7 @@ export const metadata = {
     site: '@pimpmypartymcr',  // Add your Twitter handle if you have one
     title: "Pimp My Party | Professional DJ Services Manchester",
     description: "Expert Mobile DJ, Wedding DJ & Photobooth Hire across Manchester, Salford, Bury & Greater Manchester. 20 years experience.",
-    images: ['https://pimpmyparty.co.uk/socials.png'],  // Full URL
+    images: [OG_IMAGE.url],
   },
   
   // Additional metadata
@@ -91,15 +84,15 @@ export default function RootLayout({ children }) {
     "@type": "LocalBusiness",
     // Stable identifier so other pages can reference this single business
     // entity instead of declaring a duplicate one.
-    "@id": "https://pimpmyparty.co.uk/#localbusiness",
+    "@id": LOCAL_BUSINESS_ID,
     "name": "Pimp My Party",
-    "image": "https://pimpmyparty.co.uk/socials.png",
+    "image": OG_IMAGE.url,
     "description": "Professional Mobile DJ, Wedding DJ, Saxophone Player & Photobooth Hire in Manchester, Salford, Bury & Greater Manchester. 20 years of experience delivering unforgettable events.",
     
     // Contact Information
     "telephone": "+44-7359-189070",
     "email": "hello@pimpmyparty.co.uk",
-    "url": "https://pimpmyparty.co.uk",
+    "url": url(),
     
     // Address - this is the physical business address only. The areas the
     // business actually serves, including Manchester, are in areaServed below.

@@ -11,7 +11,9 @@
 // existing entry and swap the place name — near-duplicate pages help
 // nobody.
 
-export const SITE_URL = 'https://pimpmyparty.co.uk';
+// The hostname lives in one place now. Re-exported here so the existing
+// `import { locations, SITE_URL } from '@/lib/locations'` keeps working.
+export { SITE_URL } from './site';
 
 export const CONTACT = {
   phone: '07359 189070',

@@ -1,4 +1,5 @@
 import AboutContent from "@/component/AboutContent";
+import { OG_IMAGE, url } from "@/lib/site";
 
 const title = "About Pimp My Party | 20 Years of DJ & Event Experience in Manchester";
 const description = "Twenty years of running events across Manchester and Greater Manchester, from intimate weddings to festivals of 6,000 people. Meet the team behind your DJ, saxophone player, photo booth and event planning.";
@@ -7,7 +8,7 @@ export const metadata = {
   title,
   description,
   alternates: {
-    canonical: 'https://pimpmyparty.co.uk/about',
+    canonical: url('/about'),
   },
   openGraph: {
     type: 'website',
@@ -15,23 +16,15 @@ export const metadata = {
     siteName: 'Pimp My Party',
     title,
     description,
-    url: 'https://pimpmyparty.co.uk/about',
-    images: [
-      {
-        url: 'https://pimpmyparty.co.uk/socials.png',
-        width: 1200,
-        height: 630,
-        alt: 'Pimp My Party - DJ & Entertainment Services Manchester',
-        type: 'image/png',
-      },
-    ],
+    url: url('/about'),
+    images: [OG_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     site: '@pimpmypartymcr',
     title,
     description,
-    images: ['https://pimpmyparty.co.uk/socials.png'],
+    images: [OG_IMAGE.url],
   },
 };
 
@@ -43,13 +36,13 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://pimpmyparty.co.uk"
+      "item": url()
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "About Us",
-      "item": "https://pimpmyparty.co.uk/about"
+      "item": url('/about')
     }
   ]
 };
