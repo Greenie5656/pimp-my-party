@@ -22,7 +22,36 @@ export default function Services() {
   const services = [
     { 
       Icon: Disc3, 
-      text: "DJ's For All Weddings",
+      text: "DJs For Weddings & All Events",
+      details: {
+        groups: [
+          {
+            heading: "Weddings & Celebrations",
+            items: [
+              "Weddings",
+              "Anniversaries & engagements",
+              "Birthdays",
+              "Baptisms & christenings",
+            ],
+          },
+          {
+            heading: "Milestones & Ceremonies",
+            items: [
+              "Bar & Bat Mitzvahs",
+              "School proms & graduations",
+              "Celebration of life",
+            ],
+          },
+          {
+            heading: "Corporate & Brand",
+            items: [
+              "Corporate events",
+              "Retail stores & brand activations",
+            ],
+          },
+        ],
+        note: "Karaoke available as an add-on (+£100).",
+      },
     },
     { 
       Icon: Music2, 
@@ -53,18 +82,131 @@ export default function Services() {
     { 
       Icon: ClipboardList, 
       text: "Event Management & Planning",
+      details: {
+        groups: [
+          {
+            heading: "Full Event Management",
+            items: [
+              "Planning & coordination",
+              "Event production",
+              "Artist & venue sourcing",
+              "Supplier procurement",
+            ],
+          },
+          {
+            heading: "Weddings",
+            items: [
+              "Wedding planning & coordination",
+              "Entertainment planning",
+              "Décor & venue styling",
+              "Full entertainment packages",
+            ],
+          },
+          {
+            heading: "Corporate & Business",
+            items: [
+              "Awards nights & gala dinners",
+              "Christmas parties",
+              "Product launches & brand activations",
+              "Away days & staff parties",
+              "Conferences & networking",
+            ],
+          },
+        ],
+      },
     },
     { 
       Icon: Sparkles, 
       text: "Event Design & Decor",
+      details: {
+        groups: [
+          {
+            heading: "Styling & Design",
+            items: [
+              "Themed & luxury design",
+              "Wedding, birthday & corporate styling",
+              "Colour scheme & concept",
+            ],
+          },
+          {
+            heading: "Backdrops & Balloons",
+            items: [
+              "Balloon décor & garlands",
+              "Flower walls",
+              "Bespoke backdrops",
+            ],
+          },
+          {
+            heading: "Signage & Lighting",
+            items: [
+              "LED & neon signs",
+              "Light-up letters & numbers",
+              "Welcome signs & seating plans",
+            ],
+          },
+          {
+            heading: "Tables & Room",
+            items: [
+              "Centrepieces & candle décor",
+              "Draping & room dressing",
+              "Cake & sweet tables",
+            ],
+          },
+          {
+            heading: "Feature Pieces",
+            items: [
+              "Plinths & display stands",
+              "Bespoke props & installations",
+            ],
+          },
+        ],
+      },
     },
     { 
       Icon: Lightbulb, 
       text: "Sound, Lighting, Stages & Special Effects",
+      details: {
+        groups: [
+          {
+            heading: "Stage & Production",
+            items: [
+              "Stage & set design",
+              "Lighting, sound & AV",
+              "Power & infrastructure",
+            ],
+          },
+          {
+            heading: "On The Night",
+            items: [
+              "Special effects",
+              "Event crew",
+            ],
+          },
+        ],
+      },
     },
     { 
       Icon: Camera, 
       text: "Photo Booths & Dancefloors",
+      details: {
+        groups: [
+          {
+            heading: "Photo Booths",
+            items: [
+              "Photo booth hire",
+              "Photo booth backdrops",
+            ],
+          },
+          {
+            heading: "Dancefloors & Furniture",
+            items: [
+              "Dancefloor hire",
+              "Dancefloor styling",
+              "Event furniture",
+            ],
+          },
+        ],
+      },
     },
   ];
 
