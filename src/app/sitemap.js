@@ -50,6 +50,12 @@ export default function sitemap() {
       changeFrequency: 'monthly',
       priority: 0.6,
     },
+    {
+      url: `${baseUrl}/book`,
+      lastModified: new Date('2025-05-01'),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
     ...locationPages,
   ];
 }

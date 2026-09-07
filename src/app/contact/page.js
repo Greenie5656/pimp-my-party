@@ -7,13 +7,28 @@ export const metadata = {
     canonical: 'https://pimpmyparty.co.uk/contact',
   },
   openGraph: {
+    type: 'website',
+    locale: 'en_GB',
+    siteName: 'Pimp My Party',
     title: "Contact Us | Pimp My Party - Get a Free Quote Manchester",
     description: "Get in touch with Pimp My Party for a free consultation and quote. Professional DJ, Photobooth & event services across Manchester, Salford, Bury & Greater Manchester.",
     url: 'https://pimpmyparty.co.uk/contact',
+    images: [
+      {
+        url: 'https://pimpmyparty.co.uk/socials.png',
+        width: 1200,
+        height: 630,
+        alt: 'Pimp My Party - DJ & Entertainment Services Manchester',
+        type: 'image/png',
+      },
+    ],
   },
   twitter: {
+    card: 'summary_large_image',
+    site: '@pimpmypartymcr',
     title: "Contact Us | Pimp My Party - Get a Free Quote Manchester",
     description: "Get in touch with Pimp My Party for a free consultation and quote. Professional DJ, Photobooth & event services across Manchester, Salford, Bury & Greater Manchester.",
+    images: ['https://pimpmyparty.co.uk/socials.png'],
   },
 };
 

@@ -7,13 +7,28 @@ export const metadata = {
     canonical: 'https://pimpmyparty.co.uk/services',
   },
   openGraph: {
+    type: 'website',
+    locale: 'en_GB',
+    siteName: 'Pimp My Party',
     title: "Mobile DJ & Photobooth Hire Manchester | Pimp My Party",
     description: "Mobile DJ hire, Wedding DJ, Saxophone Player & Photobooth hire across Manchester, Salford, Bury & Greater Manchester. Full event planning. 20 years experience.",
     url: 'https://pimpmyparty.co.uk/services',
+    images: [
+      {
+        url: 'https://pimpmyparty.co.uk/socials.png',
+        width: 1200,
+        height: 630,
+        alt: 'Pimp My Party - DJ & Entertainment Services Manchester',
+        type: 'image/png',
+      },
+    ],
   },
   twitter: {
+    card: 'summary_large_image',
+    site: '@pimpmypartymcr',
     title: "Mobile DJ & Photobooth Hire Manchester | Pimp My Party",
     description: "Mobile DJ hire, Wedding DJ, Saxophone Player & Photobooth hire across Manchester, Salford, Bury & Greater Manchester. Full event planning. 20 years experience.",
+    images: ['https://pimpmyparty.co.uk/socials.png'],
   },
 };
 

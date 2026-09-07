@@ -11,13 +11,28 @@ export const metadata = {
     canonical: pageUrl,
   },
   openGraph: {
+    type: 'website',
+    locale: 'en_GB',
+    siteName: 'Pimp My Party',
     title: location.title,
     description: location.description,
     url: pageUrl,
+    images: [
+      {
+        url: 'https://pimpmyparty.co.uk/socials.png',
+        width: 1200,
+        height: 630,
+        alt: 'Pimp My Party - DJ & Entertainment Services Manchester',
+        type: 'image/png',
+      },
+    ],
   },
   twitter: {
+    card: 'summary_large_image',
+    site: '@pimpmypartymcr',
     title: location.title,
     description: location.description,
+    images: ['https://pimpmyparty.co.uk/socials.png'],
   },
 };
 
