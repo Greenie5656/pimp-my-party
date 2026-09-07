@@ -10,6 +10,7 @@ import {
   CONTACT_PREFS,
   SOURCES,
   buildEstimate,
+  packageLabel,
 } from '@/lib/booking-options';
 
 const STATUS_OPTIONS = [
@@ -104,7 +105,7 @@ export default function AddEnquiryModal({ open, onClose, onCreated }) {
         body: JSON.stringify({
           ...form,
           extras: extraLabels,
-          package: pkg ? `${pkg.name} (${pkg.duration}) — £${pkg.price}` : '',
+          package: packageLabel(pkg),
           priceEstimate: estimate ? estimate.label : '',
         }),
       });

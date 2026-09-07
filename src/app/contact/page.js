@@ -1,19 +1,27 @@
 import ContactContent from "@/component/ContactContent";
+import { OG_IMAGE, url } from "@/lib/site";
 
 export const metadata = {
   title: "Contact Us | Pimp My Party - Get a Free Quote Manchester",
   description: "Get in touch with Pimp My Party for a free consultation and quote. Professional DJ, Photobooth & event services across Manchester, Salford, Bury & Greater Manchester.",
   alternates: {
-    canonical: 'https://pimpmyparty.co.uk/contact',
+    canonical: url('/contact'),
   },
   openGraph: {
+    type: 'website',
+    locale: 'en_GB',
+    siteName: 'Pimp My Party',
     title: "Contact Us | Pimp My Party - Get a Free Quote Manchester",
     description: "Get in touch with Pimp My Party for a free consultation and quote. Professional DJ, Photobooth & event services across Manchester, Salford, Bury & Greater Manchester.",
-    url: 'https://pimpmyparty.co.uk/contact',
+    url: url('/contact'),
+    images: [OG_IMAGE],
   },
   twitter: {
+    card: 'summary_large_image',
+    site: '@pimpmypartymcr',
     title: "Contact Us | Pimp My Party - Get a Free Quote Manchester",
     description: "Get in touch with Pimp My Party for a free consultation and quote. Professional DJ, Photobooth & event services across Manchester, Salford, Bury & Greater Manchester.",
+    images: [OG_IMAGE.url],
   },
 };
 
@@ -25,13 +33,13 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://pimpmyparty.co.uk"
+      "item": url()
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Contact",
-      "item": "https://pimpmyparty.co.uk/contact"
+      "item": url('/contact')
     }
   ]
 };

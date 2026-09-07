@@ -1,7 +1,8 @@
 import { publishedLocations } from '@/lib/locations';
+import { SITE_URL } from '@/lib/site';
 
 export default function sitemap() {
-  const baseUrl = 'https://pimpmyparty.co.uk';
+  const baseUrl = SITE_URL;
 
   // Location pages carry their own content date in src/lib/locations.js, so a
   // new location appears here automatically with an accurate lastModified.
@@ -49,6 +50,12 @@ export default function sitemap() {
       lastModified: new Date('2025-05-01'),
       changeFrequency: 'monthly',
       priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/book`,
+      lastModified: new Date('2025-05-01'),
+      changeFrequency: 'monthly',
+      priority: 0.9,
     },
     ...locationPages,
   ];

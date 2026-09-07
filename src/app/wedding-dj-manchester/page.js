@@ -1,5 +1,6 @@
 import LocationContent from "@/component/LocationContent";
 import { locations, SITE_URL } from "@/lib/locations";
+import { LOCAL_BUSINESS_ID, OG_IMAGE } from "@/lib/site";
 
 const location = locations.manchester;
 const pageUrl = `${SITE_URL}/${location.slug}`;
@@ -11,13 +12,20 @@ export const metadata = {
     canonical: pageUrl,
   },
   openGraph: {
+    type: 'website',
+    locale: 'en_GB',
+    siteName: 'Pimp My Party',
     title: location.title,
     description: location.description,
     url: pageUrl,
+    images: [OG_IMAGE],
   },
   twitter: {
+    card: 'summary_large_image',
+    site: '@pimpmypartymcr',
     title: location.title,
     description: location.description,
+    images: [OG_IMAGE.url],
   },
 };
 
@@ -50,7 +58,7 @@ const serviceSchema = {
   "description": location.description,
   "url": pageUrl,
   "provider": {
-    "@id": `${SITE_URL}/#localbusiness`
+    "@id": LOCAL_BUSINESS_ID
   },
   "areaServed": [
     { "@type": "City", "name": location.name },

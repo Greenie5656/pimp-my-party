@@ -1,3 +1,5 @@
+import { url } from '@/lib/site';
+
 export default function robots() {
   return {
     rules: [
@@ -7,6 +9,6 @@ export default function robots() {
         disallow: ['/api/', '/_next/', '/admin'],
       },
     ],
-    sitemap: 'https://pimpmyparty.co.uk/sitemap.xml',
+    sitemap: url('/sitemap.xml'),
   };
 }

@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useId, useState } from "react";
 import Image from "next/image";
 import { 
   Disc3, 
@@ -8,35 +9,204 @@ import {
   ClipboardList, 
   Sparkles, 
   Lightbulb, 
-  Camera 
+  Camera,
+  ChevronDown
 } from "lucide-react";
 
 export default function Services() {
+  // Only one card is open at a time. null means all collapsed.
+  const [openId, setOpenId] = useState(null);
+  // Stable ids so each toggle can point aria-controls at its own panel.
+  const baseId = useId();
   // Services with professional icons
   const services = [
     { 
       Icon: Disc3, 
-      text: "DJ's For All Weddings",
+      text: "DJs For Weddings & All Events",
+      details: {
+        groups: [
+          {
+            heading: "Weddings & Celebrations",
+            items: [
+              "Weddings",
+              "Anniversaries & engagements",
+              "Birthdays",
+              "Baptisms & christenings",
+            ],
+          },
+          {
+            heading: "Milestones & Ceremonies",
+            items: [
+              "Bar & Bat Mitzvahs",
+              "School proms & graduations",
+              "Celebration of life",
+            ],
+          },
+          {
+            heading: "Corporate & Brand",
+            items: [
+              "Corporate events",
+              "Retail stores & brand activations",
+            ],
+          },
+        ],
+        note: "Karaoke available as an add-on (+£100).",
+      },
     },
     { 
       Icon: Music2, 
       text: "Sax & Percussion Players",
+      details: {
+        groups: [
+          {
+            heading: "Saxophonist",
+            items: [
+              "Ibiza, house & club classics",
+              "Cocktail hour & welcome drinks",
+              "Chilled & sunset sets",
+              "R&B and soul",
+              "Roaming party sax",
+            ],
+          },
+          {
+            heading: "Percussionist",
+            items: [
+              "Ibiza, house & club classics",
+              "Roaming percussionist",
+              "Wedding percussionist",
+            ],
+          },
+        ],
+      },
     },
     { 
       Icon: ClipboardList, 
       text: "Event Management & Planning",
+      details: {
+        groups: [
+          {
+            heading: "Full Event Management",
+            items: [
+              "Planning & coordination",
+              "Event production",
+              "Artist & venue sourcing",
+              "Supplier procurement",
+            ],
+          },
+          {
+            heading: "Weddings",
+            items: [
+              "Wedding planning & coordination",
+              "Entertainment planning",
+              "Décor & venue styling",
+              "Full entertainment packages",
+            ],
+          },
+          {
+            heading: "Corporate & Business",
+            items: [
+              "Awards nights & gala dinners",
+              "Christmas parties",
+              "Product launches & brand activations",
+              "Away days & staff parties",
+              "Conferences & networking",
+            ],
+          },
+        ],
+      },
     },
     { 
       Icon: Sparkles, 
       text: "Event Design & Decor",
+      details: {
+        groups: [
+          {
+            heading: "Styling & Design",
+            items: [
+              "Themed & luxury design",
+              "Wedding, birthday & corporate styling",
+              "Colour scheme & concept",
+            ],
+          },
+          {
+            heading: "Backdrops & Balloons",
+            items: [
+              "Balloon décor & garlands",
+              "Flower walls",
+              "Bespoke backdrops",
+            ],
+          },
+          {
+            heading: "Signage & Lighting",
+            items: [
+              "LED & neon signs",
+              "Light-up letters & numbers",
+              "Welcome signs & seating plans",
+            ],
+          },
+          {
+            heading: "Tables & Room",
+            items: [
+              "Centrepieces & candle décor",
+              "Draping & room dressing",
+              "Cake & sweet tables",
+            ],
+          },
+          {
+            heading: "Feature Pieces",
+            items: [
+              "Plinths & display stands",
+              "Bespoke props & installations",
+            ],
+          },
+        ],
+      },
     },
     { 
       Icon: Lightbulb, 
       text: "Sound, Lighting, Stages & Special Effects",
+      details: {
+        groups: [
+          {
+            heading: "Stage & Production",
+            items: [
+              "Stage & set design",
+              "Lighting, sound & AV",
+              "Power & infrastructure",
+            ],
+          },
+          {
+            heading: "On The Night",
+            items: [
+              "Special effects",
+              "Event crew",
+            ],
+          },
+        ],
+      },
     },
     { 
       Icon: Camera, 
       text: "Photo Booths & Dancefloors",
+      details: {
+        groups: [
+          {
+            heading: "Photo Booths",
+            items: [
+              "Photo booth hire",
+              "Photo booth backdrops",
+            ],
+          },
+          {
+            heading: "Dancefloors & Furniture",
+            items: [
+              "Dancefloor hire",
+              "Dancefloor styling",
+              "Event furniture",
+            ],
+          },
+        ],
+      },
     },
   ];
 
@@ -75,6 +245,25 @@ export default function Services() {
         duration: 0.5,
         ease: "easeOut",
       },
+    },
+    // The lift used to be an inline whileHover object. It is a named variant
+    // now so the underline below can ride the same card hover - a plain
+    // object does not flow down the tree, and once the toggle button covers
+    // the card the underline can no longer be hovered directly.
+    hovered: {
+      y: -8,
+      transition: { duration: 0.3 },
+    },
+  };
+
+  // Same 0% -> 100% sweep as before, driven by the card's hover instead of
+  // the 4px strip's own.
+  const underlineVariants = {
+    hidden: { width: "0%" },
+    visible: { width: "0%" },
+    hovered: {
+      width: "100%",
+      transition: { duration: 0.4 },
     },
   };
 
@@ -142,7 +331,7 @@ export default function Services() {
         />
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20 items-start"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -150,37 +339,122 @@ export default function Services() {
         >
           {services.map((service, index) => {
             const IconComponent = service.Icon;
+            // A card without details stays exactly as it was: no button, no
+            // chevron, nothing to expand.
+            const expandable = Boolean(service.details);
+            const isOpen = expandable && openId === index;
+            const panelId = `${baseId}-panel-${index}`;
+            const buttonId = `${baseId}-toggle-${index}`;
+
+            // The icon and label are identical whether or not the card is
+            // expandable, so the collapsed state looks the same as before.
+            const summary = (
+              <>
+                {/* The chevron shares the icon's row rather than sitting in a
+                    column of its own, so the label keeps the full card width
+                    and wraps exactly where it did before. */}
+                <div className="mb-4 flex items-start justify-between gap-4">
+                  <div className="text-heliotrope group-hover:text-fuchsia transition-colors duration-300">
+                    <IconComponent
+                      size={48}
+                      strokeWidth={1.5}
+                    />
+                  </div>
+
+                  {expandable && (
+                    <ChevronDown
+                      size={22}
+                      aria-hidden="true"
+                      className={`text-heliotrope flex-shrink-0 mt-1 transition-transform duration-300 ${
+                        isOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  )}
+                </div>
+
+                <p className="text-lg font-semibold leading-tight group-hover:text-heliotrope transition-colors duration-300">
+                  {service.text}
+                </p>
+              </>
+            );
+
             return (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                whileHover={{
-                  y: -8,
-                  transition: { duration: 0.3 },
-                }}
-                className="bg-gradient-to-br from-tekhelet to-black p-8 rounded-lg cursor-pointer border-2 border-tekhelet hover:border-heliotrope group relative overflow-hidden"
+                layout
+                whileHover="hovered"
+                className={`bg-gradient-to-br from-tekhelet to-black rounded-lg cursor-pointer border-2 group relative overflow-hidden transition-colors duration-300 ${
+                  isOpen ? "border-heliotrope" : "border-tekhelet hover:border-heliotrope"
+                }`}
               >
                 {/* Pink glow effect on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-fuchsia/0 to-heliotrope/0 group-hover:from-fuchsia/10 group-hover:to-heliotrope/10 transition-all duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-br from-fuchsia/0 to-heliotrope/0 group-hover:from-fuchsia/10 group-hover:to-heliotrope/10 transition-all duration-500 pointer-events-none" />
                 
-                <div className="relative z-10">
-                  <div className="mb-4 text-heliotrope group-hover:text-fuchsia transition-colors duration-300">
-                    <IconComponent 
-                      size={48} 
-                      strokeWidth={1.5}
-                    />
+                {expandable ? (
+                  <button
+                    type="button"
+                    id={buttonId}
+                    aria-expanded={isOpen}
+                    aria-controls={panelId}
+                    onClick={() => setOpenId(isOpen ? null : index)}
+                    className="relative z-10 w-full text-left p-8 cursor-pointer"
+                  >
+                    {summary}
+                  </button>
+                ) : (
+                  <div className="relative z-10 p-8">
+                    {summary}
                   </div>
-                  <p className="text-lg font-semibold leading-tight group-hover:text-heliotrope transition-colors duration-300">
-                    {service.text}
-                  </p>
-                </div>
+                )}
+
+                {/* Detail panel */}
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      id={panelId}
+                      role="region"
+                      aria-labelledby={buttonId}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25 }}
+                      className="overflow-hidden relative z-10"
+                    >
+                      <div className="px-8 pb-8 pt-5 space-y-5 border-t border-heliotrope/25">
+                        {service.details.groups.map((group) => (
+                          <div key={group.heading}>
+                            <p className="text-sm font-semibold text-heliotrope mb-2">
+                              {group.heading}
+                            </p>
+                            <ul className="space-y-1.5">
+                              {group.items.map((item) => (
+                                <li
+                                  key={item}
+                                  className="flex items-start gap-2.5 text-sm text-gray-300"
+                                >
+                                  <span className="w-1.5 h-1.5 rounded-full bg-heliotrope flex-shrink-0 mt-1.5" />
+                                  {item}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+
+                        {service.details.note && (
+                          <p className="text-sm text-gray-400 border-t border-heliotrope/15 pt-4">
+                            {service.details.note}
+                          </p>
+                        )}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
                 {/* Bottom accent line */}
                 <motion.div
+                  variants={underlineVariants}
                   className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-fuchsia to-heliotrope"
-                  initial={{ width: "0%" }}
-                  whileHover={{ width: "100%" }}
-                  transition={{ duration: 0.4 }}
                 />
               </motion.div>
             );

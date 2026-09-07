@@ -1,10 +1,11 @@
 import BookingForm from "@/component/BookingForm";
+import { OG_IMAGE, url } from "@/lib/site";
 
 export const metadata = {
   title: "Book Your Event | Pimp My Party - DJ & Entertainment Manchester",
   description: "Book a mobile DJ, wedding DJ, photobooth or full event package with Pimp My Party. Quick online enquiry form covering Manchester, Salford, Bury & Greater Manchester.",
   alternates: {
-    canonical: 'https://pimpmyparty.co.uk/book',
+    canonical: url('/book'),
   },
   // A page that declares its own openGraph block does NOT inherit the layout's
   // images, so without these WhatsApp/Facebook fall back to scaling up the
@@ -15,23 +16,15 @@ export const metadata = {
     siteName: 'Pimp My Party',
     title: "Book Your Event | Pimp My Party - DJ & Entertainment Manchester",
     description: "Book a mobile DJ, wedding DJ, photobooth or full event package with Pimp My Party. Covering Manchester, Salford, Bury & Greater Manchester.",
-    url: 'https://pimpmyparty.co.uk/book',
-    images: [
-      {
-        url: 'https://pimpmyparty.co.uk/socials.png',
-        width: 1200,
-        height: 630,
-        alt: 'Pimp My Party - DJ & Entertainment Services Manchester',
-        type: 'image/png',
-      },
-    ],
+    url: url('/book'),
+    images: [OG_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     site: '@pimpmypartymcr',
     title: "Book Your Event | Pimp My Party - DJ & Entertainment Manchester",
     description: "Book a mobile DJ, wedding DJ, photobooth or full event package with Pimp My Party. Covering Manchester, Salford, Bury & Greater Manchester.",
-    images: ['https://pimpmyparty.co.uk/socials.png'],
+    images: [OG_IMAGE.url],
   },
 };
 
@@ -43,13 +36,13 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://pimpmyparty.co.uk"
+      "item": url()
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Book Your Event",
-      "item": "https://pimpmyparty.co.uk/book"
+      "item": url('/book')
     }
   ]
 };
