@@ -11,18 +11,19 @@ export const EVENT_TYPES = [
   'Other',
 ];
 
+// `duration` is optional. Only All-Day Wedding DJ states one, because the
+// hours on the other two are settled on the call rather than fixed here.
+// Anything reading it must cope with it being absent - use packageLabel().
 export const PACKAGES = [
   {
     id: 'party-dj',
     name: 'Party DJ',
-    duration: '5 hours',
     price: 400,
     blurb: 'Perfect for birthdays, anniversaries and celebrations.',
   },
   {
     id: 'evening-wedding-dj',
     name: 'Evening Wedding DJ',
-    duration: '5 hours',
     price: 600,
     blurb: 'From the first dance through to the last song.',
   },
@@ -61,6 +62,15 @@ export const SOURCES = [
   'Venue recommendation',
   'Other',
 ];
+
+// The one place the package string saved to the database and shown in the
+// notification email is built. Skips the duration when a package has none,
+// so we get "Party DJ — £400" rather than "Party DJ () — £400".
+export function packageLabel(pkg) {
+  if (!pkg) return '';
+  const duration = pkg.duration ? ` (${pkg.duration})` : '';
+  return `${pkg.name}${duration} — £${pkg.price}`;
+}
 
 const roundTo50 = (value) => Math.round(value / 50) * 50;
 

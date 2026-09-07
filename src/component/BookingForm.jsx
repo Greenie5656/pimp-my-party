@@ -28,6 +28,7 @@ import {
   EXTRAS,
   CONTACT_PREFS,
   buildEstimate,
+  packageLabel,
 } from '@/lib/booking-options';
 
 // --- Configuration ---------------------------------------------------------
@@ -189,9 +190,7 @@ export default function BookingForm() {
           eventDate: formData.eventDate,
           eventType: formData.eventType,
           venue: formData.venue,
-          package: selectedPackage
-            ? `${selectedPackage.name} (${selectedPackage.duration}) — £${selectedPackage.price}`
-            : '',
+          package: packageLabel(selectedPackage),
           extras: extraLabels,
           timings: formData.timings,
           musicPolicy: formData.musicPolicy,
@@ -472,7 +471,9 @@ export default function BookingForm() {
                             />
                             <div>
                               <p className="font-bold text-lg">{pkg.name}</p>
-                              <p className="text-sm text-gray-400">{pkg.duration}</p>
+                              {pkg.duration && (
+                                <p className="text-sm text-gray-400">{pkg.duration}</p>
+                              )}
                               <p className="text-sm text-gray-400 mt-1">{pkg.blurb}</p>
                             </div>
                           </div>
