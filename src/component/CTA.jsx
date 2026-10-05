@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Check, Sparkles } from 'lucide-react';
 import { trackCTAClick } from '@/lib/gtag';
+import BookingCTA from '@/component/BookingCTA';
 
 // `ctaLocation` only labels the GA4 cta_click event so pages that reuse this
 // section are distinguishable in analytics. The default keeps the homepage
@@ -90,8 +91,9 @@ export default function CTA({ ctaLocation = 'homepage_cta' }) {
               Let's bring your vision to life. Get in touch today for a free consultation and quote.
             </motion.p>
 
-            {/* Button */}
+            {/* Buttons */}
             <motion.div
+              className="flex flex-wrap justify-center gap-4"
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
@@ -120,6 +122,7 @@ export default function CTA({ ctaLocation = 'homepage_cta' }) {
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </motion.div>
               </motion.a>
+              <BookingCTA label="Book Online" location={`${ctaLocation}_book`} variant="light" />
             </motion.div>
 
             {/* Trust badges */}

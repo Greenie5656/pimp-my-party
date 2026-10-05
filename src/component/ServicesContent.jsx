@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import {
   Sparkles,
   Calendar,
@@ -14,6 +15,7 @@ import {
   MapPin
 } from 'lucide-react';
 import { trackCTAClick } from '@/lib/gtag';
+import BookingCTA from '@/component/BookingCTA';
 
 export default function ServicesContent() {
   // Animation variants - these control HOW things move
@@ -252,6 +254,14 @@ export default function ServicesContent() {
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Our professional mobile DJ, wedding DJ, saxophone player, and photobooth hire services are available throughout Manchester, Salford, Bury, Heywood, Middleton, Prestwich, Oldham, Worsley, and across Greater Manchester, Cheshire, and Lancashire.
+              {' '}Planning a wedding? You can book your DJ and photo booth together. See{' '}
+              <Link
+                href="/wedding-dj-manchester"
+                className="text-purple-600 hover:text-pink-600 underline underline-offset-4 transition-colors duration-300"
+              >
+                what we provide for Manchester weddings
+              </Link>
+              .
             </p>
           </motion.div>
 
@@ -359,15 +369,18 @@ export default function ServicesContent() {
               <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
                 Let's bring your vision to life. Get in touch with us today for a free consultation.
               </p>
-              <motion.a
-                href="/contact"
-                onClick={() => trackCTAClick('get_started_today', 'services_page')}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-block bg-white text-purple-600 px-8 py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
-              >
-                Get Started Today
-              </motion.a>
+              <div className="flex flex-wrap justify-center gap-4">
+                <motion.a
+                  href="/contact"
+                  onClick={() => trackCTAClick('get_started_today', 'services_page')}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="inline-block bg-white text-purple-600 px-8 py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+                >
+                  Get Started Today
+                </motion.a>
+                <BookingCTA label="Book Online" location="services_page_book" variant="light" />
+              </div>
             </div>
           </div>
         </motion.div>

@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
-import { trackFormSubmission } from '@/lib/gtag';
+import { trackBookingStart, trackFormSubmission } from '@/lib/gtag';
 import {
   Calendar,
   MapPin,
@@ -88,6 +88,10 @@ export default function BookingForm() {
   const cardRef = useRef(null);
   const isFirstRender = useRef(true);
 
+  // GA4 booking_start should fire once per visit, even if someone goes
+  // back to step 1 and forward again.
+  const hasTrackedStart = useRef(false);
+
   useEffect(() => {
     // Don't hijack the scroll position on the initial page load.
     if (isFirstRender.current) {
@@ -154,6 +158,10 @@ export default function BookingForm() {
       setError(message);
       return;
     }
+    if (step === 1 && !hasTrackedStart.current) {
+      hasTrackedStart.current = true;
+      trackBookingStart({ event_type: formData.eventType, step: 1 });
+    }
     setStep(step + 1);
   };
 
@@ -205,7 +213,11 @@ export default function BookingForm() {
       const data = await response.json();
 
       if (response.ok) {
-        trackFormSubmission('booking_form');
+        // The honeypot also answers 200 OK so bots don't notice. Only a real
+        // save comes back with an id, so only that counts as a lead.
+        if (data.id) {
+          trackFormSubmission('booking_form', { package_tier: formData.package });
+        }
         setSubmitted(true);
       } else {
         setError(data.error || 'Something went wrong. Please try again.');

@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 export default function LocalAreas() {
   return (
@@ -75,6 +76,14 @@ export default function LocalAreas() {
           {' '}Need a <strong className="text-pink-400">Wedding DJ in Salford or Bury</strong>?
           {' '}Want to hire a <strong className="text-purple-400">Photobooth in Greater Manchester</strong>?
           {' '}We've got you covered across all of Greater Manchester, Cheshire, and Lancashire with 20 years of experience delivering unforgettable events.
+          {' '}Getting married in the city? Take a look at our{' '}
+          <Link
+            href="/wedding-dj-manchester"
+            className="text-purple-400 hover:text-pink-400 underline underline-offset-4 transition-colors duration-300"
+          >
+            wedding DJ hire in Manchester
+          </Link>
+          , with live sax, photo booths and dancefloors available alongside.
         </motion.p>
       </div>
     </section>

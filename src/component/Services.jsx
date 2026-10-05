@@ -206,6 +206,7 @@ export default function Services() {
             ],
           },
         ],
+        note: "Photo booths can be added to any DJ booking.",
       },
     },
   ];
@@ -470,7 +471,7 @@ export default function Services() {
           transition={{ duration: 0.8 }}
         >
           <motion.h3
-            className="text-3xl md:text-4xl font-bold text-center mb-2 text-heliotrope"
+            className="text-3xl max-[374px]:text-2xl md:text-4xl font-bold text-center mb-2 text-heliotrope"
             variants={titleVariants}
             initial="hidden"
             whileInView="visible"
