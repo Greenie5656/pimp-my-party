@@ -769,7 +769,7 @@ All three are small separate fixes I can do if you want.
    - try the hero button and the wedding page "Check Availability";
    - scroll down/up and watch the nav hide/show;
    - do **not** submit a real enquiry on the preview unless you want it in the live database (the preview may share production env vars).
-2. **GA4 DebugView** (Admin → DebugView). Install the "Google Analytics Debugger" Chrome extension, or add `?debug_mode=1` support later. Visit the preview, click a Book button, pass step 1 and submit a test enquiry. You should see `booking_cta_click`, `booking_start` and `generate_lead`.
+2. **GA4 DebugView** (Admin → DebugView). Install the "Google Analytics Debugger" Chrome extension and switch it on. Visit the preview, click a Book button, pass step 1 and submit a test enquiry. You should see `booking_cta_click`, `booking_start` and `generate_lead`.
 3. **Register custom dimensions** (Admin → Custom definitions → Create custom dimension, scope **Event**):
    - `cta_location`
    - `event_type`
