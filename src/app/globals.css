@@ -30,9 +30,9 @@ body { @apply bg-background text-foreground font-sans; }
   display: none;  /* Safari and Chrome */
 }
 
-/* Phones under 400px (iPhone mini/SE/12-15, most Androids): the six nav
-   links didn't fit and "Home"/"Contact" were cut off at the edges. */
-@media (max-width: 399px) {
+/* Phones up to 430px (iPhone mini/SE/12-15/Pro Max, most Androids): the
+   six nav links didn't fit and "Home"/"Contact" were cut off at the edges. */
+@media (max-width: 430px) {
   nav ul {
     gap: 0.5rem !important;
   }
