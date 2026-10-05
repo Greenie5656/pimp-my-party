@@ -225,8 +225,9 @@ const handleSubmit = async (e) => {
         </div>
       </section>
 
-      {/* Direct Contact Methods */}
-      <section className="py-12 px-4">
+      {/* Direct Contact Methods - overflow-hidden stops the Email card's
+          slide-in from the right making the page scroll sideways. */}
+      <section className="py-12 px-4 overflow-hidden">
         <div className="max-w-4xl mx-auto">
           <motion.h2
             initial={{ opacity: 0 }}
