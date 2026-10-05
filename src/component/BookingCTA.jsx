@@ -19,7 +19,7 @@ const VARIANTS = {
   light:
     'inline-flex items-center gap-3 bg-white text-purple-600 px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-2xl transition-all duration-300',
   nav:
-    'inline-flex items-center gap-1.5 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold text-sm px-4 py-1.5 rounded-full transition-opacity duration-300 hover:opacity-90',
+    'inline-flex items-center gap-1.5 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold text-sm whitespace-nowrap px-4 py-1 rounded-full transition-opacity duration-300 hover:opacity-90',
 };
 
 // `label` is the button text. `location` only labels the GA4

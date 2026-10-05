@@ -14,6 +14,7 @@ import {
   MapPin
 } from 'lucide-react';
 import { trackCTAClick } from '@/lib/gtag';
+import BookingCTA from '@/component/BookingCTA';
 
 export default function ServicesContent() {
   // Animation variants - these control HOW things move
@@ -359,15 +360,18 @@ export default function ServicesContent() {
               <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
                 Let's bring your vision to life. Get in touch with us today for a free consultation.
               </p>
-              <motion.a
-                href="/contact"
-                onClick={() => trackCTAClick('get_started_today', 'services_page')}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-block bg-white text-purple-600 px-8 py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
-              >
-                Get Started Today
-              </motion.a>
+              <div className="flex flex-wrap justify-center gap-4">
+                <motion.a
+                  href="/contact"
+                  onClick={() => trackCTAClick('get_started_today', 'services_page')}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="inline-block bg-white text-purple-600 px-8 py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+                >
+                  Get Started Today
+                </motion.a>
+                <BookingCTA label="Book Online" location="services_page_book" variant="light" />
+              </div>
             </div>
           </div>
         </motion.div>

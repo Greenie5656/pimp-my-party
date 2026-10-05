@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
+import BookingCTA from "@/component/BookingCTA";
 
 export default function NavBar() {
   const pathname = usePathname();
@@ -151,7 +152,25 @@ const navLinks = [
               </motion.li>
             );
           })}
+
+          {/* Booking button - joins the link row on desktop (lg up). Below
+              that the six links already fill the width, so it gets its own
+              row underneath. */}
+          <motion.li variants={itemVariants} className="hidden lg:block">
+            <BookingCTA label="Book Now" location="navbar_desktop" variant="nav" />
+          </motion.li>
         </motion.ul>
+
+        {/* Phones and tablets: a slim booking row inside the sticky nav, so it
+            hides and shows with the links on scroll. */}
+        <motion.div
+          className="lg:hidden flex justify-center mt-2"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.9, ease: "easeOut" }}
+        >
+          <BookingCTA label="Book Now" location="navbar_mobile" variant="nav" />
+        </motion.div>
       </div>
     </nav>
   );

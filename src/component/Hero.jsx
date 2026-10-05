@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
+import BookingCTA from "@/component/BookingCTA";
 
 export default function Hero() {
   const [videoLoaded, setVideoLoaded] = useState(false);
@@ -70,7 +71,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex flex-wrap items-center justify-center gap-3 mb-12 text-center px-4"
+          className="flex flex-wrap items-center justify-center gap-3 mb-6 text-center px-4"
         >
           <motion.div
             animate={{
@@ -104,6 +105,16 @@ export default function Hero() {
           >
             <Sparkles className="text-fuchsia" size={28} />
           </motion.div>
+        </motion.div>
+
+        {/* Booking button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="flex justify-center mb-10"
+        >
+          <BookingCTA label="Book Your Event" location="homepage_hero" />
         </motion.div>
 
         {/* Video Section - Optimized for YouTube Shorts (vertical) */}
