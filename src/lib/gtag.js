@@ -15,10 +15,13 @@ export function trackEvent(eventName, parameters = {}) {
 
 // --- Pre-built event helpers ---
 
-export function trackFormSubmission(formName) {
+// `extra` lets a form add safe, non-personal detail (e.g. the package
+// chosen). The contact form passes nothing, so its event is unchanged.
+export function trackFormSubmission(formName, extra = {}) {
   trackEvent('generate_lead', {
     event_category: 'form',
     event_label: formName,
+    ...extra,
   });
 }
 
@@ -74,4 +77,10 @@ export function trackBookingCTAClick(location) {
   trackEvent('booking_cta_click', {
     cta_location: location,
   });
+}
+
+// The visitor has finished step 1 of the booking form and moved on.
+// Never send personal details here - only things like the event type.
+export function trackBookingStart(params = {}) {
+  trackEvent('booking_start', params);
 }
