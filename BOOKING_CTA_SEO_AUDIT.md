@@ -2,7 +2,7 @@
 
 **Date:** 5 October 2026
 **Audited commit:** `f48b830` (tip of `main`)
-**Status:** Phase 1 complete. **No code has been changed.** Waiting for "approved" before Phase 2.
+**Status:** Phase 1 approved 5 Oct 2026. Phases 2 and 3 complete on branch `feat/booking-cta-seo`. See **Changes Made** at the bottom.
 
 This file is written for a beginner. Each section starts with the short answer, then gives the detail.
 
@@ -591,4 +591,191 @@ Why each rule holds:
 
 ---
 
-*Phase 2 changes will be listed below in a "Changes Made" section after approval.*
+---
+
+# Changes Made (Phases 2 and 3)
+
+## Your answers to section 8
+
+A: slim phone row inside the sticky nav · B: fix the overflow as its own commit first · C: hero button yes · D: `booking_start` when step 1 is passed · E: Stripe link stays · F: sitemap dates untouched.
+
+## Commits (one per task, each revertable on its own)
+
+| Order | Commit message | Task |
+|---|---|---|
+| 1 | `docs: Phase 1 booking CTA and SEO audit (no code changes)` | Audit |
+| 2 | `feat(booking): add reusable BookingCTA button and click tracking` | Task 1 |
+| 3 | `fix(nav): stop nav links being cut off on narrow phones` | Answer B (before the booking row) |
+| 4 | `feat(booking): add Book buttons to nav, homepage hero and CTA boxes` | Task 2 |
+| 5 | `feat(booking): add Check Availability button to the wedding DJ page` | Task 3 |
+| 6 | `feat(seo): link the homepage areas copy to the wedding DJ Manchester page` | Task 4 |
+| 7 | `feat(seo): describe DJ + photo booth together and link to the wedding page` | Task 5 |
+| 8 | `feat(analytics): track booking_start and count only real booking leads` | Task 6 |
+| 9 | `docs: record changes made and Phase 3 verification` | This section |
+
+To undo any single change later: `git revert <commit>`.
+
+## Every file changed
+
+| File | What changed |
+|---|---|
+| `src/lib/site.js` | **+** `BOOKING_PATH = '/book'` (the one place the booking URL lives) |
+| `src/lib/gtag.js` | `trackEvent` wrapped in `try/catch`. **+** `trackBookingCTAClick(location)`, **+** `trackBookingStart(params)`. `trackFormSubmission(formName, extra = {})` now accepts optional extra params |
+| `src/component/BookingCTA.jsx` | **New.** The reusable booking button (see below) |
+| `src/app/globals.css` | Nav text/gap smaller below 400px; gap tighter below 360px |
+| `src/component/NavBar.jsx` | "Book Now" in the link row from 1024px up; a slim "Book Now" row below the links under 1024px |
+| `src/component/Hero.jsx` | "Book Your Event" between the tagline and video; tagline `mb-12` → `mb-6` |
+| `src/component/CTA.jsx` | "Book Online" beside "Get Your Free Quote" (homepage + wedding page box) |
+| `src/component/ServicesContent.jsx` | "Book Online" beside "Get Started Today"; one new sentence + link (Task 5) |
+| `src/component/LocationContent.jsx` | "Check Availability" as the first hero button on the wedding page |
+| `src/component/LocalAreas.jsx` | One new sentence + link on the homepage (Task 4) |
+| `src/component/Services.jsx` | `note` on the Photo Booths card |
+| `src/component/BookingForm.jsx` | **Analytics only:** `booking_start` + `useRef` guard; existing `generate_lead` now requires `data.id` and adds `package_tier` |
+
+**Not touched** (checked with `git diff origin/main` → empty): every `page.js` (metadata/JSON-LD), `layout.js`, `sitemap.js`, `robots.js`, `locations.js`, `booking-options.js`, the API routes, `auth.js`, `db.js`, `email.js`, `SiteChrome.jsx`, `AddEnquiryModal.jsx`, `AdminDashboard.jsx`, `AdminLogin.jsx`, `/admin`, `migrations/`, and the Stripe constant.
+
+## How the new button works (props explained)
+
+`<BookingCTA label="Book Now" location="navbar_mobile" variant="nav" />`
+
+| Prop | What you pass | What it does |
+|---|---|---|
+| `label` | Text, e.g. `"Check Availability"` | The words on the button |
+| `location` | A short name, e.g. `"homepage_hero"` | Not shown on the page. It's sent to GA4 as `cta_location` so you can see **which** button was clicked |
+| `variant` | `'primary'` (default), `'light'` or `'nav'` | Picks one of the site's existing button looks: gradient pill, white pill, or compact nav pill |
+
+What happens on click:
+1. `onClick` calls `trackBookingCTAClick(location)`.
+2. That calls `trackEvent('booking_cta_click', { cta_location })`, which pushes it to GA4. If GA is blocked or broken, the `try/catch` swallows the error.
+3. `next/link` then takes the visitor to `BOOKING_PATH` (`/book`) without a full page reload.
+
+| Button | Text | `cta_location` sent |
+|---|---|---|
+| Nav, desktop (1024px+) | Book Now | `navbar_desktop` |
+| Nav, phones/tablets (<1024px) | Book Now | `navbar_mobile` |
+| Homepage hero | Book Your Event | `homepage_hero` |
+| Homepage bottom box | Book Online | `homepage_cta_book` |
+| Wedding page hero | Check Availability | `wedding-dj-manchester_hero` |
+| Wedding page bottom box | Book Online | `wedding-dj-manchester_page_book` |
+| Services page box | Book Online | `services_page_book` |
+
+**One deviation from the plan:** at 768–1023px (tablets) the desktop "Book Now" pill was squashed onto two lines, so the nav grew. The pill now joins the link row only from **1024px**, and tablets get the slim row like phones. Desktop (1024px+) nav height: 61px before → 62px after.
+
+## Copy changes: BEFORE / AFTER
+
+**1. Homepage, "Serving Greater Manchester & Beyond" closing paragraph** (`LocalAreas.jsx`)
+
+| BEFORE | AFTER |
+|---|---|
+| …We've got you covered across all of Greater Manchester, Cheshire, and Lancashire with 20 years of experience delivering unforgettable events. | …We've got you covered across all of Greater Manchester, Cheshire, and Lancashire with 20 years of experience delivering unforgettable events. Getting married in the city? Take a look at our **[wedding DJ hire in Manchester](/wedding-dj-manchester)**, with live sax, photo booths and dancefloors available alongside. |
+
+**2. /services, "Serving Greater Manchester & Beyond" intro** (`ServicesContent.jsx`)
+
+| BEFORE | AFTER |
+|---|---|
+| …available throughout Manchester, Salford, Bury, Heywood, Middleton, Prestwich, Oldham, Worsley, and across Greater Manchester, Cheshire, and Lancashire. | …available throughout Manchester, Salford, Bury, Heywood, Middleton, Prestwich, Oldham, Worsley, and across Greater Manchester, Cheshire, and Lancashire. Planning a wedding? You can book your DJ and photo booth together. See **[what we provide for Manchester weddings](/wedding-dj-manchester)**. |
+
+**3. Homepage "Photo Booths & Dancefloors" card, expanded panel** (`Services.jsx`)
+
+| BEFORE | AFTER |
+|---|---|
+| *(no note)* | Photo booths can be added to any DJ booking. |
+
+**4. New button labels:** "Book Now", "Book Your Event", "Book Online", "Check Availability" (no existing text was changed).
+
+**5. Wedding DJ Manchester page:** **no wording changes.**
+
+## Tracking: what is sent
+
+| Event | When | Params |
+|---|---|---|
+| `booking_cta_click` (new) | Click on any Book button | `cta_location` |
+| `booking_start` (new) | First time a visitor passes step 1 of `/book` (once per visit) | `event_type` (e.g. `Wedding`), `step: 1` |
+| `generate_lead` (existing, tightened) | Only when the API returns an enquiry `id` | `event_category: 'form'`, `event_label: 'booking_form'`, **new** `package_tier` (e.g. `evening-wedding-dj`) |
+
+No names, emails, phone numbers, venues or free text are sent.
+
+**Your extra checks:**
+1. **Contact form `generate_lead`.** It sends `event_category: 'form'` and **`event_label: 'contact_form'`**. The booking form sends `event_label: 'booking_form'`. So the two **can** be told apart. The value lives in a parameter called `event_label` (not `form_name`), and you'll need to register `event_label` as a custom dimension in GA4 to see it in reports (manual step 3 below). The contact form was **not changed**, as you instructed.
+2. **API route** (`src/app/api/enquiries/route.js`):
+   - Honeypot hit (lines 55-57): `return NextResponse.json({ ok: true }, { status: 200 })`, with **no `id`**.
+   - Real save (lines 130-133): `return NextResponse.json({ ok: true, id: rows[0].id }, { status: 201 })`. The `id` comes from Postgres `RETURNING id`.
+   - Validation errors return 400 and DB errors return 500 (`response.ok` is false).
+   - Checked live against the built site: honeypot POST → `{"ok":true} [200]`; missing name → `{"error":"Please tell us your name."} [400]`.
+
+   So `data.id` is a reliable "real lead" signal.
+
+## Phase 3 verification
+
+**Lint and build:** `npm run lint` ✅ no warnings. `npm run build` ✅ 16/16 pages.
+
+**SEO baseline comparison.** I re-extracted the rendered HTML of all 8 public pages and diffed it against the Phase 1 baseline.
+
+| Checked | Result |
+|---|---|
+| Titles, meta descriptions, robots | ✅ identical on all 8 pages |
+| Canonicals | ✅ identical |
+| og:title / og:url / og:image / twitter:image | ✅ identical (`socials.png` everywhere) |
+| H1 / H2 / H3 | ✅ identical (button text is not a heading) |
+| JSON-LD (content fingerprint of every block) | ✅ identical |
+| `sitemap.xml` | ✅ byte-identical |
+| `robots.txt` | ✅ unchanged |
+| Only difference | New `<a>` links: the Book buttons, plus the 2 new contextual links to `/wedding-dj-manchester` |
+
+**Behaviour checks** (production build, headless Chromium):
+
+| Check | Result |
+|---|---|
+| Desktop nav "Book Now" → `/book` | ✅ `booking_cta_click {cta_location: navbar_desktop}` |
+| Phone nav "Book Now" → `/book` | ✅ `navbar_mobile` |
+| Hero, both CTA boxes, wedding hero, services box | ✅ all reach `/book` with the right `cta_location` |
+| Existing "Get Your Free Quote" | ✅ still goes to `/contact` |
+| `/book` page load | ✅ no events fired |
+| Continue with empty step 1 | ✅ error shown, no `booking_start` |
+| Step 1 → 2 → Back → 2 | ✅ `booking_start` fired **once** (`event_type: Wedding, step: 1`) |
+| Submit with invalid name/email | ✅ error shown, no lead |
+| API 201 + id (real save) | ✅ confirmation + **one** `generate_lead` |
+| API 200 without id (honeypot) | ✅ confirmation (as before), **no** `generate_lead` |
+| API 500 / network failure | ✅ error shown, no `generate_lead` |
+| GA script blocked (ad blocker) | ✅ form and buttons work normally |
+| `window.gtag` throwing errors | ✅ nav click and full booking still work, no page errors |
+| Nav hide/show on scroll, 375px + 1280px | ✅ hides on scroll down, returns on scroll up (booking row moves with it) |
+| `/admin` | ✅ no GA script, no `dataLayer`, no nav, no Book links |
+| Admin API unauthenticated GET | unchanged (405) |
+
+**Nav overflow fix (answer B).** No nav link goes off-screen at any width or on any page.
+
+| Width | Before | After |
+|---|---|---|
+| 320px | "Home"/"Contact" clipped | ✅ all links visible |
+| 375px | clipped, page scrolled sideways (392px) | ✅ fits, no sideways scroll |
+| 390px | clipped, page scrolled sideways (399px) | ✅ fits, no sideways scroll |
+| 412/414px | fits | ✅ fits |
+| 1024px+ | fits | ✅ unchanged layout |
+
+**Not caused by the nav, so left alone (pre-existing):**
+- **Homepage at 320px** still scrolls sideways (355px). The cause is the letter-by-letter animated heading ("Trusted By The Best", `Services.jsx`), whose non-breaking spaces stop it wrapping on very small screens.
+- **`/contact`** is 4px too wide at all phone widths. The cause is one of the contact cards (`ContactContent.jsx`).
+- **400–411px widths** (rare) are just above your "below 400px" limit, so they still use the old sizes. That means a 4px clip at exactly 400px.
+
+All three are small separate fixes I can do if you want.
+
+**Page weight:** homepage First Load JS 153 kB → 157 kB (the shared nav button + icon). `/book` is unchanged at 148 kB.
+
+## Manual steps for you
+
+1. **Test the Vercel preview on your phone.** Open the PR's preview link and:
+   - tap "Book Now" in the nav;
+   - try the hero button and the wedding page "Check Availability";
+   - scroll down/up and watch the nav hide/show;
+   - do **not** submit a real enquiry on the preview unless you want it in the live database (the preview may share production env vars).
+2. **GA4 DebugView** (Admin → DebugView). Install the "Google Analytics Debugger" Chrome extension, or add `?debug_mode=1` support later. Visit the preview, click a Book button, pass step 1 and submit a test enquiry. You should see `booking_cta_click`, `booking_start` and `generate_lead`.
+3. **Register custom dimensions** (Admin → Custom definitions → Create custom dimension, scope **Event**):
+   - `cta_location`
+   - `event_type`
+   - `package_tier`
+   - `event_label`, if it isn't registered already. This is what separates `booking_form` from `contact_form` leads.
+   - `step` (optional)
+4. **Key events** (Admin → Events, or Key events). Make sure `generate_lead` is marked as a key event. It may be already. Optionally mark `booking_start` too, as a softer "intent" signal. Leave `booking_cta_click` as a normal event.
+5. After merging, **re-check GA4 the next day.** Custom-dimension data only appears for events sent after the dimension is created, and standard reports take 24–48h.
+6. **Optional:** in Search Console, request indexing for `/book` once it's live and linked. Nothing else is needed for SEO.
