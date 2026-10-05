@@ -612,6 +612,12 @@ A: slim phone row inside the sticky nav · B: fix the overflow as its own commit
 | 7 | `feat(seo): describe DJ + photo booth together and link to the wedding page` | Task 5 |
 | 8 | `feat(analytics): track booking_start and count only real booking leads` | Task 6 |
 | 9 | `docs: record changes made and Phase 3 verification` | This section |
+| 10 | `docs: clarify the GA4 DebugView step` | This section |
+| 11 | `fix(nav): extend small-screen nav sizing up to 430px` | Follow-up fix 1 |
+| 12 | `fix(home): stop "Trusted By The Best" overflowing on the smallest phones` | Follow-up fix 2 |
+| 13 | `fix(contact): stop the Email card's slide-in causing sideways scroll` | Follow-up fix 3 |
+| 14 | `fix(home): only shrink "Trusted By The Best" below 375px` | Follow-up fix 2 (refined after measuring) |
+| 15 | `docs: record the three follow-up overflow fixes` | This section |
 
 To undo any single change later: `git revert <commit>`.
 
@@ -622,14 +628,15 @@ To undo any single change later: `git revert <commit>`.
 | `src/lib/site.js` | **+** `BOOKING_PATH = '/book'` (the one place the booking URL lives) |
 | `src/lib/gtag.js` | `trackEvent` wrapped in `try/catch`. **+** `trackBookingCTAClick(location)`, **+** `trackBookingStart(params)`. `trackFormSubmission(formName, extra = {})` now accepts optional extra params |
 | `src/component/BookingCTA.jsx` | **New.** The reusable booking button (see below) |
-| `src/app/globals.css` | Nav text/gap smaller below 400px; gap tighter below 360px |
+| `src/app/globals.css` | Nav text/gap smaller up to 430px (was: below 400px, see follow-up fix 1); gap tighter below 360px |
 | `src/component/NavBar.jsx` | "Book Now" in the link row from 1024px up; a slim "Book Now" row below the links under 1024px |
 | `src/component/Hero.jsx` | "Book Your Event" between the tagline and video; tagline `mb-12` → `mb-6` |
 | `src/component/CTA.jsx` | "Book Online" beside "Get Your Free Quote" (homepage + wedding page box) |
 | `src/component/ServicesContent.jsx` | "Book Online" beside "Get Started Today"; one new sentence + link (Task 5) |
 | `src/component/LocationContent.jsx` | "Check Availability" as the first hero button on the wedding page |
 | `src/component/LocalAreas.jsx` | One new sentence + link on the homepage (Task 4) |
-| `src/component/Services.jsx` | `note` on the Photo Booths card |
+| `src/component/Services.jsx` | `note` on the Photo Booths card; "Trusted By The Best" uses `text-2xl` below 375px (follow-up fix 2) |
+| `src/component/ContactContent.jsx` | `overflow-hidden` on the "Or Contact Us Directly" section (follow-up fix 3). The contact form and its tracking are untouched |
 | `src/component/BookingForm.jsx` | **Analytics only:** `booking_start` + `useRef` guard; existing `generate_lead` now requires `data.id` and adds `package_tier` |
 
 **Not touched** (checked with `git diff origin/main` → empty): every `page.js` (metadata/JSON-LD), `layout.js`, `sitemap.js`, `robots.js`, `locations.js`, `booking-options.js`, the API routes, `auth.js`, `db.js`, `email.js`, `SiteChrome.jsx`, `AddEnquiryModal.jsx`, `AdminDashboard.jsx`, `AdminLogin.jsx`, `/admin`, `migrations/`, and the Stripe constant.
@@ -743,22 +750,62 @@ No names, emails, phone numbers, venues or free text are sent.
 | `/admin` | ✅ no GA script, no `dataLayer`, no nav, no Book links |
 | Admin API unauthenticated GET | unchanged (405) |
 
-**Nav overflow fix (answer B).** No nav link goes off-screen at any width or on any page.
+**Nav overflow fix (answer B, extended in follow-up fix 1).** No nav link goes off-screen at any width or on any page.
 
 | Width | Before | After |
 |---|---|---|
 | 320px | "Home"/"Contact" clipped | ✅ all links visible |
 | 375px | clipped, page scrolled sideways (392px) | ✅ fits, no sideways scroll |
 | 390px | clipped, page scrolled sideways (399px) | ✅ fits, no sideways scroll |
-| 412/414px | fits | ✅ fits |
+| 400px | clipped by 4px | ✅ fits |
+| 412/414/430px | fits, right at the edge | ✅ fits |
+| 768px (tablet) | fits | ✅ unchanged sizing (booking row underneath) |
 | 1024px+ | fits | ✅ unchanged layout |
 
-**Not caused by the nav, so left alone (pre-existing):**
-- **Homepage at 320px** still scrolls sideways (355px). The cause is the letter-by-letter animated heading ("Trusted By The Best", `Services.jsx`), whose non-breaking spaces stop it wrapping on very small screens.
-- **`/contact`** is 4px too wide at all phone widths. The cause is one of the contact cards (`ContactContent.jsx`).
-- **400–411px widths** (rare) are just above your "below 400px" limit, so they still use the old sizes. That means a 4px clip at exactly 400px.
+### Follow-up fixes (requested after the first review)
 
-All three are small separate fixes I can do if you want.
+Each is its own commit, CSS/class only, and can be reverted separately.
+
+**1. Nav at 400–411px** (`globals.css`). The small-screen nav sizing stopped at 399px, so 400–411px screens still clipped by up to 4px.
+
+| BEFORE | AFTER |
+|---|---|
+| `@media (max-width: 399px) { nav ul { gap: .5rem } nav span { font-size: .8125rem } }` | Same rule, `@media (max-width: 430px)` |
+
+Tablet (768px+) and desktop sizing are unchanged.
+
+**2. Homepage sideways scroll at 320px** (`Services.jsx`). "Trusted By The Best" is animated letter by letter with non-breaking spaces, so it can't wrap. At 30px it measures 339px wide; with the 32px of side padding it overflows any screen narrower than 371px.
+
+| BEFORE | AFTER |
+|---|---|
+| `text-3xl md:text-4xl` | `text-3xl max-[374px]:text-2xl md:text-4xl` |
+
+The heading is 24px only on screens under 375px. 375px+ phones, tablets and desktop are unchanged. The heading text, `<h3>` tag and animation are unchanged, and the SEO extract confirms the H3 text is identical. (I first used <380px, then measured and narrowed it to <375px so iPhone SE/mini keep the original size. That's why there are two commits.)
+
+**3. `/contact` 4px overflow** (`ContactContent.jsx`). The Email card starts 20px to the right and slides in when scrolled into view (`initial={{ x: 20 }}`). Until then it stuck out past the screen edge, so the page was 4px too wide on phones.
+
+| BEFORE | AFTER |
+|---|---|
+| `<section className="py-12 px-4">` | `<section className="py-12 px-4 overflow-hidden">` |
+
+The slide-in and hover animations are unchanged.
+
+**Re-check after the follow-up fixes** (production build). Every page (`/`, `/book`, `/wedding-dj-manchester`, `/services`, `/about`, `/contact`, `/gallery`, `/brochure`) was measured on load **and** after scrolling to the bottom, so scroll-triggered animations were included.
+
+| Width | Nav links clipped | Sideways scroll | Nav height |
+|---|---|---|---|
+| 320px | ✅ none | ✅ none on any page | 93px |
+| 375px | ✅ none | ✅ none | 93px |
+| 390px | ✅ none | ✅ none | 93px |
+| 400px | ✅ none | ✅ none | 93px |
+| 412px / 414px | ✅ none | ✅ none | 93px |
+| 430px / 431px | ✅ none | ✅ none | 93px |
+| 768px | ✅ none | ✅ none | 97px |
+| 1024px / 1280px | ✅ none | ✅ none | 62px (unchanged from before the follow-ups) |
+
+- **SEO baseline:** re-extracted all 8 pages. Titles, descriptions, robots, canonicals, OG/Twitter tags, H1–H3 and JSON-LD are still identical to the Phase 1 baseline, and `sitemap.xml` is still byte-identical. The rendered SEO output is identical to the PR state before these fixes.
+- **Booking/tracking tests re-run:** all still pass. That covers nav clicks, a single `booking_start`, `generate_lead` only on 201 + id, no lead for honeypot/500/network failure, the form working with GA blocked or throwing, hide-on-scroll, and no GA on `/admin`.
+- `npm run lint` ✅ and `npm run build` ✅ pass.
 
 **Page weight:** homepage First Load JS 153 kB → 157 kB (the shared nav button + icon). `/book` is unchanged at 148 kB.
 
