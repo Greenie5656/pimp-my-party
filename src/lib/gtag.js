@@ -2,8 +2,14 @@ export const GA_MEASUREMENT_ID = 'G-J22NSQHKQ2';
 
 // Send a custom GA4 event
 export function trackEvent(eventName, parameters = {}) {
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', eventName, parameters);
+  // Tracking must never break the page - e.g. if an ad blocker interferes
+  // with GA, the click or form submission still carries on as normal.
+  try {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', eventName, parameters);
+    }
+  } catch {
+    // Ignore - analytics is optional.
   }
 }
 
@@ -59,5 +65,13 @@ export function trackSocialClick(platform) {
   trackEvent('social_click', {
     event_category: 'social',
     event_label: platform,
+  });
+}
+
+// Clicks on any "Book" button. `location` says which button it was, e.g.
+// 'navbar_desktop' or 'homepage_hero'.
+export function trackBookingCTAClick(location) {
+  trackEvent('booking_cta_click', {
+    cta_location: location,
   });
 }

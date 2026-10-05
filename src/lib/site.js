@@ -36,3 +36,7 @@ export const OG_IMAGE = {
   alt: 'Pimp My Party - DJ & Entertainment Services Manchester',
   type: 'image/png',
 };
+
+// The public booking form. Every "Book" button on the site links here, so
+// moving the form means changing this one line.
+export const BOOKING_PATH = '/book';
