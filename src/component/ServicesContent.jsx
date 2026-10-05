@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import {
   Sparkles,
   Calendar,
@@ -253,6 +254,14 @@ export default function ServicesContent() {
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Our professional mobile DJ, wedding DJ, saxophone player, and photobooth hire services are available throughout Manchester, Salford, Bury, Heywood, Middleton, Prestwich, Oldham, Worsley, and across Greater Manchester, Cheshire, and Lancashire.
+              {' '}Planning a wedding? You can book your DJ and photo booth together. See{' '}
+              <Link
+                href="/wedding-dj-manchester"
+                className="text-purple-600 hover:text-pink-600 underline underline-offset-4 transition-colors duration-300"
+              >
+                what we provide for Manchester weddings
+              </Link>
+              .
             </p>
           </motion.div>
 

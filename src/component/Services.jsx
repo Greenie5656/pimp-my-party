@@ -206,6 +206,7 @@ export default function Services() {
             ],
           },
         ],
+        note: "Photo booths can be added to any DJ booking.",
       },
     },
   ];
