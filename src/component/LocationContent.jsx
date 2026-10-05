@@ -7,6 +7,7 @@ import { MapPin, Phone, MessageCircle, Mail } from 'lucide-react';
 import { trackPhoneClick, trackWhatsAppClick, trackEmailClick } from '@/lib/gtag';
 import { CONTACT } from '@/lib/locations';
 import CTA from '@/component/CTA';
+import BookingCTA from '@/component/BookingCTA';
 
 // Renders a location landing page from a single entry in src/lib/locations.js.
 // Styling and animation deliberately mirror the existing dark pages
@@ -43,6 +44,7 @@ export default function LocationContent({ location }) {
 
           {/* Primary contact actions - reuse the existing tracking helpers */}
           <div className="mt-10 flex flex-wrap justify-center gap-4">
+            <BookingCTA label="Check Availability" location={`${location.slug}_hero`} />
             <motion.a
               href={CONTACT.phoneHref}
               onClick={() => trackPhoneClick(`${location.slug}_hero`)}
