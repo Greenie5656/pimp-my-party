@@ -23,14 +23,14 @@ export default function Header() {
           }}
           className="cursor-pointer"
         >
-          <Image
-            src="/logo.png"
-            alt="Pimp My Party Logo"
-            width={300}
-            height={300}
-            className="w-32 h-auto sm:w-40 md:w-48 lg:w-52 xl:w-56"
-            priority
-          />
+<Image
+  src="/logo.png"
+  alt="Pimp My Party Logo"
+  width={400}
+  height={400}
+  className="w-40 h-auto sm:w-48 md:w-56 lg:w-64 xl:w-72"
+  priority
+/>
         </motion.div>
       </div>
     </header>

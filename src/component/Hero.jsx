@@ -54,7 +54,7 @@ export default function Hero() {
           className="text-center mb-6"
         >
           <h1 className="text-4xl md:text-6xl font-bold mb-2 bg-gradient-to-r from-heliotrope via-fuchsia to-heliotrope bg-clip-text text-transparent">
-            Professional DJ Services
+            Professional Entertainment Services
           </h1>
           
           {/* Animated underline */}
@@ -88,7 +88,7 @@ export default function Hero() {
             <Sparkles className="text-fuchsia" size={28} />
           </motion.div>
           <p className="text-xl md:text-2xl text-heliotrope font-semibold text-center">
-            Making your party unforgettable!
+           Making your party unforgettable!
           </p>
           <motion.div
             animate={{
